@@ -1,7 +1,7 @@
 # Task-01: Initialize Next.js Project with TypeScript
 
 **Phase:** PHASE 0 - Project Setup
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** None (initial task)
 
 ---
@@ -14,12 +14,12 @@ Create a new Next.js 14 project with TypeScript, App Router, and strict mode ena
 
 ## Definition of Done
 
-- [ ] Next.js project created with `create-next-app`
-- [ ] TypeScript strict mode enabled in `tsconfig.json`
-- [ ] App Router structure in place (`app/` directory)
-- [ ] Development server starts without errors
-- [ ] Basic page renders at `http://localhost:3000`
-- [ ] Git repository initialized with initial commit
+- [x] Next.js project created with `create-next-app`
+- [x] TypeScript strict mode enabled in `tsconfig.json`
+- [x] App Router structure in place (`app/` directory)
+- [x] Development server starts without errors
+- [x] Basic page renders at `http://localhost:3000`
+- [x] Git repository initialized with initial commit
 
 ---
 
