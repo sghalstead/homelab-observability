@@ -22,13 +22,7 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 
 ## Project Status
 
-🚧 **In Development** - See [docs/project-plan.md](docs/project-plan.md) for implementation progress.
-
-## Documentation
-
-- [Project Plan](docs/project-plan.md) - High-level plan with task tracker
-- [Task Approach](docs/task-approach.md) - Development standards and workflow
-- [Task Files](docs/tasks/) - Individual task specifications
+In Development - See [docs/project-plan.md](docs/project-plan.md) for implementation progress.
 
 ## Getting Started
 
@@ -36,12 +30,23 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 # Install dependencies
 npm install
 
-# Set up the database
-npm run db:push
-
-# Start development server
+# Run development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Run linting
+npm run lint
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Documentation
+
+- [Project Plan](docs/project-plan.md) - High-level plan with task tracker
+- [Task Approach](docs/task-approach.md) - Development standards and workflow
+- [Task Files](docs/tasks/) - Individual task specifications
 
 ## License
 
