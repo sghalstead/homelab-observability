@@ -40,6 +40,25 @@ npm run build
 npm run lint
 ```
 
+## Testing
+
+```bash
+# Run unit tests in watch mode
+npm test
+
+# Run unit tests once
+npm run test:run
+
+# Run unit tests with coverage report
+npm run test:coverage
+
+# Run E2E tests (starts dev server automatically)
+npm run test:e2e
+
+# Run E2E tests with interactive UI
+npm run test:e2e:ui
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Documentation
