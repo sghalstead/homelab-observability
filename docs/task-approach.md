@@ -25,10 +25,12 @@ This document defines the standards and best practices for executing tasks in th
 
 ### Commit Workflow
 1. Complete all work for the task
-2. Update task status to complete in the main plan tracker
-3. Stage all changed files: `git add .`
-4. Create commit with standardized message
-5. Verify commit includes all expected changes
+2. Update task status to complete in the task file (`docs/tasks/task-NN.md`)
+3. Update task status to complete in the main plan tracker (`docs/project-plan.md`)
+4. Stage all changed files: `git add .`
+5. Create commit with standardized message
+6. Verify commit includes all expected changes
+7. Push committed changes to remote: `git push`
 
 ### When to Squash
 - Multiple experimental attempts during implementation
@@ -176,9 +178,11 @@ Create a detailed sub-plan within the task file when:
 4. **Write tests** for the expected behavior
 5. **Execute implementation** following task details
 6. **Run validation** (automated + manual)
-7. **Update task status** in main plan
-8. **Create commit** with proper message
-9. **Move to next task** (if dependencies allow)
+7. **Update task status** in task file (`docs/tasks/task-NN.md`)
+8. **Update task status** in main plan (`docs/project-plan.md`)
+9. **Create commit** with proper message
+10. **Push to remote:** `git push`
+11. **Move to next task** (if dependencies allow)
 
 ### For Critical Tasks
 1. Read task file thoroughly
@@ -187,7 +191,8 @@ Create a detailed sub-plan within the task file when:
 4. **Execute step-by-step** with checkpoints
 5. **Extra validation:** Manual testing of all scenarios
 6. Run full test suite
-7. Update status and commit
+7. Update status in task file and main plan
+8. Create commit and push to remote
 
 ## Risk Management
 
