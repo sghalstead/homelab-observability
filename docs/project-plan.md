@@ -31,9 +31,9 @@ This project builds a comprehensive observability service for a homelab environm
 ## Quick Reference
 
 - **Total Tasks:** 24
-- **Completed:** 7/24
+- **Completed:** 8/24
 - **In Progress:** None
-- **Current Phase:** PHASE 1 (System Metrics Collection)
+- **Current Phase:** PHASE 2 (Docker Integration)
 
 ---
 
@@ -69,7 +69,7 @@ This project builds a comprehensive observability service for a homelab environm
 |--------|------|-------------|--------------|
 | [x] | **Task-06** | Implement system metrics collector (CPU, memory, temp, disk) | Task-04 |
 | [x] | **Task-07** | Create API routes for system metrics | Task-06 |
-| [ ] | **Task-08** | Add metrics persistence to database | Task-06, Task-04 |
+| [x] | **Task-08** | Add metrics persistence to database | Task-06, Task-04 |
 
 ### PHASE 2: Docker Integration
 
@@ -338,10 +338,10 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 7/24 tasks complete (29%)
+Progress: 8/24 tasks complete (33%)
 
 PHASE 0: [#####] 5/5 complete (100%)
-PHASE 1: [##-] 2/3 complete (67%)
+PHASE 1: [###] 3/3 complete (100%)
 PHASE 2: [---] 0/3 complete (0%)
 PHASE 3: [---] 0/3 complete (0%)
 PHASE 4: [---] 0/3 complete (0%)
