@@ -85,6 +85,14 @@ npm run dev
 ```
 
 ### Manual Validation
+
+**Development Server Verification:**
+1. Run `npm run dev` to start the development server
+2. Open http://localhost:3000 in a browser
+3. Check for errors in the terminal output
+4. Fix any errors that occur before proceeding
+
+**Browser Verification:**
 - **Browser check:** Application loads without errors
 - **Console check:** No errors or warnings in browser console
 - **Network tab:** API calls working correctly
@@ -177,12 +185,16 @@ Create a detailed sub-plan within the task file when:
 3. **Understand Definition of Done** for this task
 4. **Write tests** for the expected behavior
 5. **Execute implementation** following task details
-6. **Run validation** (automated + manual)
-7. **Update task status** in task file (`docs/tasks/task-NN.md`)
-8. **Update task status** in main plan (`docs/project-plan.md`)
-9. **Create commit** with proper message
-10. **Push to remote:** `git push`
-11. **Move to next task** (if dependencies allow)
+6. **Run automated validation** (`npm test`, `npm run lint`, `npm run build`)
+7. **Run dev server validation:**
+   - Run `npm run dev`
+   - Open http://localhost:3000 in browser
+   - Fix any errors that occur
+8. **Update task status** in task file (`docs/tasks/task-NN.md`)
+9. **Update task status** in main plan (`docs/project-plan.md`)
+10. **Create commit** with proper message
+11. **Push to remote:** `git push`
+12. **Move to next task** (if dependencies allow)
 
 ### For Critical Tasks
 1. Read task file thoroughly
@@ -283,4 +295,4 @@ A successful task execution:
 
 ---
 
-*Last updated: 2025-12-30*
+*Last updated: 2026-01-02*
