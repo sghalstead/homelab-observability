@@ -60,7 +60,7 @@ This project builds a comprehensive observability service for a homelab environm
 | [x] | **Task-01** | Initialize Next.js project with TypeScript | None |
 | [x] | **Task-02** | Set up testing infrastructure (Vitest, RTL, Playwright) | Task-01 |
 | [x] | **Task-03** | Configure linting and formatting (ESLint, Prettier) | Task-01 |
-| [ ] | **Task-04** | Set up database (SQLite + Drizzle ORM) | Task-01 |
+| [x] | **Task-04** | Set up database (SQLite + Drizzle ORM) | Task-01 |
 | [ ] | **Task-05** | Add UI dependencies (Tailwind, shadcn/ui, Recharts) | Task-01 |
 
 ### PHASE 1: System Metrics Collection
