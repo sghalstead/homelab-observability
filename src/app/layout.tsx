@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { QueryProvider } from '@/providers/query-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
+import { DashboardLayout } from '@/components/layout/dashboard-layout';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -15,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Homelab Observability',
+  title: 'Homelab Observatory',
   description: 'Monitor your homelab services and metrics',
 };
 
@@ -25,9 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <QueryProvider>
+            <DashboardLayout>{children}</DashboardLayout>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
