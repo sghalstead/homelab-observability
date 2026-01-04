@@ -61,6 +61,7 @@ A task is only complete when **ALL** of the following are met:
 - [ ] Any deviations from the plan are documented in task file
 - [ ] Rationale for alternative approaches is explained
 - [ ] Breaking changes or risks are highlighted
+- [ ] Project documentation updated if task changes affect them (see [Documentation Maintenance](#documentation-maintenance))
 
 ## Validation Requirements
 
@@ -192,9 +193,13 @@ Create a detailed sub-plan within the task file when:
    - Fix any errors that occur
 8. **Update task status** in task file (`docs/tasks/task-NN.md`)
 9. **Update task status** in main plan (`docs/project-plan.md`)
-10. **Create commit** with proper message
-11. **Push to remote:** `git push`
-12. **Move to next task** (if dependencies allow)
+10. **Review and update documentation** (see [Documentation Maintenance](#documentation-maintenance)):
+    - `README.md` - if task adds features, commands, or API changes
+    - `CLAUDE.md` - if task changes structure, schema, or patterns
+    - `WALKTHROUGH.md` - if task modifies architecture or key components
+11. **Create commit** with proper message
+12. **Push to remote:** `git push`
+13. **Move to next task** (if dependencies allow)
 
 ### For Critical Tasks
 1. Read task file thoroughly
@@ -204,7 +209,8 @@ Create a detailed sub-plan within the task file when:
 5. **Extra validation:** Manual testing of all scenarios
 6. Run full test suite
 7. Update status in task file and main plan
-8. Create commit and push to remote
+8. **Review and update documentation** (`README.md`, `CLAUDE.md`, `WALKTHROUGH.md`)
+9. Create commit and push to remote
 
 ## Risk Management
 
@@ -252,6 +258,52 @@ Create a detailed sub-plan within the task file when:
 - Explain non-obvious decisions
 - Use clear, concise language
 
+## Documentation Maintenance
+
+After completing a task, review and update these documentation files if the task introduces changes that affect them:
+
+### Files to Review
+
+| File | When to Update |
+|------|----------------|
+| `README.md` | New features, API changes, command changes, environment variables |
+| `CLAUDE.md` | Project structure changes, new patterns, database schema changes, API changes |
+| `WALKTHROUGH.md` | Architecture changes, new components, data flow changes, testing changes |
+| `docs/project-plan.md` | Always (task status) |
+
+### Update Checklist
+
+After each task, ask yourself:
+
+1. **README.md** - Does the task add:
+   - [ ] New npm scripts or commands?
+   - [ ] New environment variables?
+   - [ ] New API endpoints?
+   - [ ] New features to document?
+   - [ ] Changes to getting started steps?
+
+2. **CLAUDE.md** - Does the task change:
+   - [ ] Project structure (new directories/files)?
+   - [ ] Database schema or tables?
+   - [ ] API endpoints or response formats?
+   - [ ] Important patterns or conventions?
+   - [ ] Tech stack or dependencies?
+
+3. **WALKTHROUGH.md** - Does the task modify:
+   - [ ] Overall architecture?
+   - [ ] Key code files or their behavior?
+   - [ ] Data flow patterns?
+   - [ ] UI components or pages?
+   - [ ] Testing approach or test files?
+
+### Timestamp Updates
+
+When updating `WALKTHROUGH.md`, update the "Last Updated" timestamp at the top of the file:
+
+```markdown
+**Last Updated:** YYYY-MM-DD
+```
+
 ## Success Metrics
 
 A successful task execution:
@@ -295,4 +347,4 @@ A successful task execution:
 
 ---
 
-*Last updated: 2026-01-02*
+*Last updated: 2026-01-04*

@@ -1,0 +1,5 @@
+# Update embedded code snippets in documentation
+npm run docs:update
+
+# Stage any changes to WALKTHROUGH.md (in case embedme updated it)
+git add WALKTHROUGH.md

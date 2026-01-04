@@ -19,7 +19,10 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "docs:update": "embedme WALKTHROUGH.md",
+    "docs:verify": "embedme --verify WALKTHROUGH.md",
+    "prepare": "husky"
   },
   "dependencies": {
     "@radix-ui/react-progress": "^1.1.8",
@@ -55,10 +58,12 @@
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "^4.0.16",
     "drizzle-kit": "^0.31.8",
+    "embedme": "^1.22.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "postcss": "^8",
     "prettier": "^3.7.4",

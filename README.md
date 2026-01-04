@@ -119,6 +119,10 @@ npm run db:push          # Apply schema to database
 npm run db:generate      # Generate migrations
 npm run db:migrate       # Run migrations
 npm run db:studio        # Open Drizzle Studio
+
+# Documentation
+npm run docs:update      # Sync code snippets in WALKTHROUGH.md
+npm run docs:verify      # Verify code snippets are up to date
 ```
 
 ## Environment Variables
@@ -130,9 +134,11 @@ npm run db:studio        # Open Drizzle Studio
 
 ## Documentation
 
+- [Project Walkthrough](WALKTHROUGH.md) - Comprehensive technical overview
 - [Project Plan](docs/project-plan.md) - Task tracker and progress
 - [Task Approach](docs/task-approach.md) - Development standards
 - [Task Files](docs/tasks/) - Individual task specifications
+- [CLAUDE.md](CLAUDE.md) - AI assistant context
 
 ## License
 
