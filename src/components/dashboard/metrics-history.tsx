@@ -34,20 +34,18 @@ export function MetricsHistory() {
         <SystemMetricsChart
           data={data || []}
           isLoading={isLoading}
-          title="CPU & Memory Usage"
+          title="CPU, Memory & Disk Usage"
           metrics={[
             { key: 'cpuUsage', name: 'CPU %', color: 'hsl(var(--chart-1))' },
             { key: 'memoryPercent', name: 'Memory %', color: 'hsl(var(--chart-2))' },
+            { key: 'diskPercent', name: 'Disk %', color: 'hsl(var(--chart-3))' },
           ]}
         />
         <SystemMetricsChart
           data={data || []}
           isLoading={isLoading}
-          title="Disk & Temperature"
-          metrics={[
-            { key: 'diskPercent', name: 'Disk %', color: 'hsl(var(--chart-3))' },
-            { key: 'cpuTemperature', name: 'Temp °C', color: 'hsl(var(--chart-4))' },
-          ]}
+          title="CPU Temperature"
+          metrics={[{ key: 'cpuTemperature', name: 'Temp °C', color: 'hsl(var(--chart-4))' }]}
         />
       </div>
     </div>
