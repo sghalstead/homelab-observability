@@ -30,8 +30,8 @@ This project builds a comprehensive observability service for a homelab environm
 
 ## Quick Reference
 
-- **Total Tasks:** 24
-- **Completed:** 11/24
+- **Total Tasks:** 27
+- **Completed:** 11/27
 - **In Progress:** None
 - **Current Phase:** PHASE 2 (Docker Integration)
 
@@ -117,6 +117,14 @@ This project builds a comprehensive observability service for a homelab environm
 |--------|------|-------------|--------------|
 | [ ] | **Task-24** | Final polish, error handling, and documentation | All tasks |
 
+### PHASE 8: Production Deployment
+
+| Status | Task | Description | Dependencies |
+|--------|------|-------------|--------------|
+| [ ] | **Task-25** | Create systemd service unit file for production | Task-01 |
+| [ ] | **Task-26** | Create deployment script (build + restart service) | Task-25 |
+| [ ] | **Task-27** | Document production setup and deployment process | Task-26 |
+
 ---
 
 ## Dependencies Matrix
@@ -124,6 +132,7 @@ This project builds a comprehensive observability service for a homelab environm
 ### Critical Path
 ```
 Task-01 → Task-02,03,04,05 → Task-06 → Task-07,08 → Task-19 → Task-23 → Task-24
+Task-01 → Task-25 → Task-26 → Task-27 (Production deployment - can run in parallel)
 ```
 
 ### Parallel Execution Opportunities
@@ -267,7 +276,7 @@ interface OllamaStatus {
 ## Success Criteria
 
 ### Technical Criteria
-- [ ] All 24 tasks complete
+- [ ] All 27 tasks complete
 - [ ] TypeScript strict mode with no errors
 - [ ] All tests pass (unit, integration, E2E)
 - [ ] Production build succeeds
@@ -286,6 +295,12 @@ interface OllamaStatus {
 - [ ] UI updates at reasonable intervals (5-10s)
 - [ ] Error states handled gracefully
 - [ ] Mobile-responsive design
+
+### Deployment Criteria
+- [ ] Systemd service starts app on boot
+- [ ] Service auto-restarts on failure
+- [ ] Deploy script builds and restarts cleanly
+- [ ] Dev and prod can run independently
 
 ---
 
@@ -338,7 +353,7 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 11/24 tasks complete (46%)
+Progress: 11/27 tasks complete (41%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
@@ -348,6 +363,7 @@ PHASE 4: [---] 0/3 complete (0%)
 PHASE 5: [##---] 2/5 complete (40%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)
+PHASE 8: [---] 0/3 complete (0%)
 ```
 
 ---
@@ -360,4 +376,4 @@ PHASE 7: [-] 0/1 complete (0%)
 
 ---
 
-*Last Updated: 2026-01-02*
+*Last Updated: 2026-01-21*
