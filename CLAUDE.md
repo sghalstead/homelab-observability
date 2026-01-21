@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 12/27 tasks complete (44%) - Phase 2 (Docker Integration) + Phase 8 (Production Deployment)
+**Current Status:** 14/27 tasks complete (52%) - Phase 2 (Docker Integration)
 
 ## Development Approach
 
@@ -45,56 +45,19 @@ homelab-observability/
 
 ## Database
 
-### Connection
-The database is SQLite with WAL mode, located at `./data/observability.db`.
+SQLite with WAL mode at `./data/observability.db`. See README for CLI access.
 
-**From terminal (SQLite CLI):**
-```bash
-sqlite3 ./data/observability.db
-
-# Useful commands inside sqlite3:
-.tables              # List all tables
-.schema system_metrics  # Show table schema
-SELECT * FROM system_metrics ORDER BY timestamp DESC LIMIT 5;
-.quit                # Exit
-```
-
-**From code:**
+**Code access:**
 ```typescript
-// Import the database client
 import { db } from '@/db';
 import { systemMetrics } from '@/db/schema';
 
-// Query example
 const metrics = await db.select().from(systemMetrics).limit(10);
-
-// Insert example
-await db.insert(systemMetrics).values({
-  timestamp: new Date(),
-  cpuUsage: 45.2,
-  cpuTemperature: 55.0,
-  memoryTotal: 8000000000,
-  memoryUsed: 4000000000,
-  memoryPercent: 50.0,
-  diskTotal: 100000000000,
-  diskUsed: 50000000000,
-  diskPercent: 50.0,
-});
 ```
 
-### Schema Tables
-- `systemMetrics` - CPU, memory, disk, temperature readings
-- `containerMetrics` - Docker container stats (not yet implemented)
-- `serviceSnapshots` - Systemd service states (not yet implemented)
-- `ollamaMetrics` - Ollama AI workload data (not yet implemented)
+**Schema tables:** `systemMetrics`, `containerMetrics` (planned), `serviceSnapshots` (planned), `ollamaMetrics` (planned)
 
-### Database Commands
-```bash
-npm run db:push      # Apply schema to database
-npm run db:generate  # Generate migrations
-npm run db:migrate   # Run migrations
-npm run db:studio    # Open Drizzle Studio GUI
-```
+**Commands:** `npm run db:push` (apply schema), `npm run db:studio` (GUI)
 
 ## API Endpoints
 
@@ -115,25 +78,14 @@ interface ApiResponse<T> {
 ## Key Commands
 
 ```bash
-# Development
-npm run dev          # Start dev server (http://localhost:3000)
+npm run dev          # Dev server (localhost:3000)
 npm run build        # Production build
-npm run lint         # Run ESLint
-npm run format       # Format with Prettier
-
-# Testing
-npm test             # Vitest watch mode
-npm run test:run     # Vitest single run
-npm run test:e2e     # Playwright E2E tests
-
-# Production Deployment
-./scripts/service-install.sh  # Install systemd service (one-time)
-npm run deploy                # Build and restart service
-npm run deploy:quick          # Deploy without lint checks
-npm run service:restart       # Restart service only
-npm run service:status        # Check service status
-npm run service:logs          # Follow service logs
+npm run test:run     # Run tests once
+npm run lint         # ESLint
+npm run deploy       # Build and restart prod service
 ```
+
+See README for full command reference.
 
 ## Commit Convention
 
@@ -171,13 +123,6 @@ npm run service:logs          # Follow service logs
 - **Systemd**: Via `systemctl` commands
 - **Ollama**: Via REST API (default: http://localhost:11434)
 
-## Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `METRICS_COLLECTION_INTERVAL_MS` | `60000` | Collection interval (ms) |
-| `METRICS_RETENTION_HOURS` | `168` | Data retention (7 days) |
-
 ## Important Patterns
 
 - API routes return `ApiResponse<T>` with `success`, `data`, `error`, `timestamp`
@@ -185,3 +130,12 @@ npm run service:logs          # Follow service logs
 - Services are in `src/lib/services/` - business logic (storage, scheduling)
 - Types are in `src/lib/types/` - shared TypeScript interfaces
 - Configuration via `src/lib/config.ts` - reads environment variables
+
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| README.md | User-facing: getting started, full command reference |
+| WALKTHROUGH.md | Deep technical walkthrough of architecture and code |
+| docs/production.md | Production deployment and troubleshooting |
+| docs/project-plan.md | Task tracker and project progress |

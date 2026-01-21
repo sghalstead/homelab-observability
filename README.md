@@ -29,7 +29,7 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 
 ## Project Status
 
-**Progress:** 13/27 tasks complete (48%) - Currently in Phase 2 (Docker Integration) + Phase 8 (Production Deployment)
+**Progress:** 14/27 tasks complete (52%) - Currently in Phase 2 (Docker Integration)
 
 See [docs/project-plan.md](docs/project-plan.md) for detailed implementation progress.
 

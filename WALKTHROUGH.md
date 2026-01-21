@@ -1,6 +1,6 @@
 # Homelab Observability - Project Walkthrough
 
-**Last Updated:** 2026-01-04
+**Last Updated:** 2026-01-21
 
 This document provides a comprehensive technical walkthrough of the homelab-observability codebase, covering architecture, key implementations, and testing components.
 
