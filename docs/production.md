@@ -44,6 +44,7 @@ Available settings:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PORT` | `3001` | HTTP server port (hardcoded in npm script) |
+| `DATABASE_PATH` | `./data/prod.db` | SQLite database file path |
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
 | `METRICS_RETENTION_HOURS` | `168` | How long to keep historical data (7 days) |
 
@@ -55,7 +56,7 @@ npm run build
 
 ### 4. Initialize Database
 
-The SQLite database is created automatically on first run at `./data/observability.db`.
+The SQLite database is created automatically on first run at `./data/prod.db` (production uses a separate database from development).
 
 ### 5. Install Systemd Service
 
@@ -295,7 +296,7 @@ npm run build
 sudo systemctl stop homelab-observability
 
 # Backup database
-cp data/observability.db data/observability.db.backup
+cp data/prod.db data/prod.db.backup
 
 # Restart service
 sudo systemctl start homelab-observability
@@ -310,14 +311,14 @@ Create a cron job for daily backups:
 crontab -e
 
 # Add daily backup at 2 AM
-0 2 * * * cp /home/steven/code/homelab-observability/data/observability.db /home/steven/code/homelab-observability/data/observability.db.$(date +\%Y\%m\%d)
+0 2 * * * cp /home/steven/code/homelab-observability/data/prod.db /home/steven/code/homelab-observability/data/prod.db.$(date +\%Y\%m\%d)
 ```
 
 ### Restore from Backup
 
 ```bash
 sudo systemctl stop homelab-observability
-cp data/observability.db.backup data/observability.db
+cp data/prod.db.backup data/prod.db
 sudo systemctl start homelab-observability
 ```
 
@@ -386,7 +387,7 @@ systemctl status homelab-observability
 ps aux | grep next
 
 # Database size
-du -h data/observability.db
+du -h data/prod.db
 ```
 
 ### Health Check Endpoint
@@ -425,7 +426,7 @@ rm -rf data/
 | View logs | `npm run service:logs` |
 | Deploy changes | `npm run deploy` |
 | Quick deploy | `npm run deploy:quick` |
-| Backup database | `cp data/observability.db data/observability.db.backup` |
+| Backup database | `cp data/prod.db data/prod.db.backup` |
 
 ---
 

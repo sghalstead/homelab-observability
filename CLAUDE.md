@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 14/27 tasks complete (52%) - Phase 2 (Docker Integration)
+**Current Status:** 15/28 tasks complete (54%) - Phase 2 (Docker Integration)
 
 ## Development Approach
 
@@ -45,7 +45,7 @@ homelab-observability/
 
 ## Database
 
-SQLite with WAL mode at `./data/observability.db`. See README for CLI access.
+SQLite with WAL mode. Files are environment-specific: `./data/dev.db` (dev), `./data/prod.db` (prod).
 
 **Code access:**
 ```typescript

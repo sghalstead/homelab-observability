@@ -227,7 +227,12 @@ export function useSystemHistory(hours = 24) {
 ```ts
 // src/lib/config.ts
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 export const config = {
+  database: {
+    path: process.env.DATABASE_PATH || (isDevelopment ? './data/dev.db' : './data/prod.db'),
+  },
   metrics: {
     collectionIntervalMs: parseInt(process.env.METRICS_COLLECTION_INTERVAL_MS || '60000', 10),
     retentionHours: parseInt(
@@ -278,8 +283,9 @@ Additional tables (stubs for future implementation):
 import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import * as schema from './schema';
+import { config } from '@/lib/config';
 
-const sqlite = new Database('./data/observability.db');
+const sqlite = new Database(config.database.path);
 sqlite.pragma('journal_mode = WAL');
 
 export const db = drizzle(sqlite, { schema });
@@ -291,7 +297,8 @@ export * from './schema';
 ### CLI Access
 
 ```bash
-sqlite3 ./data/observability.db
+sqlite3 ./data/dev.db   # Development database
+sqlite3 ./data/prod.db  # Production database
 
 # Useful commands:
 .tables                    # List all tables

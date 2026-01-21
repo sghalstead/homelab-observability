@@ -1,4 +1,9 @@
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 export const config = {
+  database: {
+    path: process.env.DATABASE_PATH || (isDevelopment ? './data/dev.db' : './data/prod.db'),
+  },
   metrics: {
     collectionIntervalMs: parseInt(process.env.METRICS_COLLECTION_INTERVAL_MS || '60000', 10),
     retentionHours: parseInt(

@@ -30,8 +30,8 @@ This project builds a comprehensive observability service for a homelab environm
 
 ## Quick Reference
 
-- **Total Tasks:** 27
-- **Completed:** 14/27
+- **Total Tasks:** 28
+- **Completed:** 15/28
 - **In Progress:** None
 - **Current Phase:** PHASE 2 (Docker Integration)
 
@@ -124,6 +124,7 @@ This project builds a comprehensive observability service for a homelab environm
 | [x] | **Task-25** | Create systemd service unit file for production | Task-01 |
 | [x] | **Task-26** | Create deployment script (build + restart service) | Task-25 |
 | [x] | **Task-27** | Document production setup and deployment process | Task-26 |
+| [x] | **Task-28** | Segregate dev and prod database files | Task-04 |
 
 ---
 
@@ -276,7 +277,7 @@ interface OllamaStatus {
 ## Success Criteria
 
 ### Technical Criteria
-- [ ] All 27 tasks complete
+- [ ] All 28 tasks complete
 - [ ] TypeScript strict mode with no errors
 - [ ] All tests pass (unit, integration, E2E)
 - [ ] Production build succeeds
@@ -353,7 +354,7 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 14/27 tasks complete (52%)
+Progress: 15/28 tasks complete (54%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
@@ -363,7 +364,7 @@ PHASE 4: [---] 0/3 complete (0%)
 PHASE 5: [##---] 2/5 complete (40%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)
-PHASE 8: [###] 3/3 complete (100%)
+PHASE 8: [####] 4/4 complete (100%)
 ```
 
 ---

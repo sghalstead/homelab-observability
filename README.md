@@ -29,7 +29,7 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 
 ## Project Status
 
-**Progress:** 14/27 tasks complete (52%) - Currently in Phase 2 (Docker Integration)
+**Progress:** 15/28 tasks complete (54%) - Currently in Phase 2 (Docker Integration)
 
 See [docs/project-plan.md](docs/project-plan.md) for detailed implementation progress.
 
@@ -50,7 +50,9 @@ Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
 
 ## Database
 
-The project uses SQLite with Drizzle ORM. The database file is stored at `./data/observability.db`.
+The project uses SQLite with Drizzle ORM. Database files are environment-specific:
+- **Development:** `./data/dev.db`
+- **Production:** `./data/prod.db`
 
 ```bash
 # Apply schema changes to database
@@ -67,7 +69,8 @@ npm run db:studio
 
 **From terminal (SQLite CLI):**
 ```bash
-sqlite3 ./data/observability.db
+sqlite3 ./data/dev.db   # Development
+sqlite3 ./data/prod.db  # Production
 ```
 
 **From code:**
@@ -137,10 +140,11 @@ npm run service:logs     # Follow service logs
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PORT` | `3000` (dev) / `3001` (prod) | HTTP server port |
+| `DATABASE_PATH` | `./data/dev.db` (dev) / `./data/prod.db` (prod) | SQLite database file |
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
 | `METRICS_RETENTION_HOURS` | `168` | How long to keep metrics (7 days) |
 
-**Note:** Dev runs on port 3000, production on port 3001, allowing both to run simultaneously.
+**Note:** Dev and production use separate databases and ports, allowing both to run simultaneously.
 
 ## Production Deployment
 
