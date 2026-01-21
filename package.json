@@ -22,7 +22,12 @@
     "db:studio": "drizzle-kit studio",
     "docs:update": "embedme WALKTHROUGH.md",
     "docs:verify": "embedme --verify WALKTHROUGH.md",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:quick": "./scripts/deploy.sh --skip-checks",
+    "service:restart": "./scripts/restart.sh",
+    "service:status": "./scripts/status.sh",
+    "service:logs": "journalctl -u homelab-observability -f"
   },
   "dependencies": {
     "@radix-ui/react-progress": "^1.1.8",

@@ -126,11 +126,13 @@ npm test             # Vitest watch mode
 npm run test:run     # Vitest single run
 npm run test:e2e     # Playwright E2E tests
 
-# Production (see docs/tasks/task-25.md for full setup)
-./scripts/service-install.sh  # Install systemd service
-sudo systemctl start homelab-observability  # Start production
-sudo systemctl status homelab-observability # Check status
-journalctl -u homelab-observability -f      # View logs
+# Production Deployment
+./scripts/service-install.sh  # Install systemd service (one-time)
+npm run deploy                # Build and restart service
+npm run deploy:quick          # Deploy without lint checks
+npm run service:restart       # Restart service only
+npm run service:status        # Check service status
+npm run service:logs          # Follow service logs
 ```
 
 ## Commit Convention
