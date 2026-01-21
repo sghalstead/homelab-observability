@@ -158,11 +158,12 @@ sudo systemctl start homelab-observability
 npm run deploy                   # Build and restart
 ```
 
-See [docs/tasks/task-25.md](docs/tasks/task-25.md) for detailed setup instructions.
+See [Production Deployment Guide](docs/production.md) for detailed setup, troubleshooting, and maintenance instructions.
 
 ## Documentation
 
 - [Project Walkthrough](WALKTHROUGH.md) - Comprehensive technical overview
+- [Production Guide](docs/production.md) - Deployment, troubleshooting, maintenance
 - [Project Plan](docs/project-plan.md) - Task tracker and progress
 - [Task Approach](docs/task-approach.md) - Development standards
 - [Task Files](docs/tasks/) - Individual task specifications
