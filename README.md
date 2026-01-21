@@ -136,8 +136,11 @@ npm run service:logs     # Follow service logs
 
 | Variable | Default | Description |
 |----------|---------|-------------|
+| `PORT` | `3000` (dev) / `3001` (prod) | HTTP server port |
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
 | `METRICS_RETENTION_HOURS` | `168` | How long to keep metrics (7 days) |
+
+**Note:** Dev runs on port 3000, production on port 3001, allowing both to run simultaneously.
 
 ## Production Deployment
 

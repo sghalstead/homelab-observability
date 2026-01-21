@@ -69,7 +69,7 @@ if systemctl is-active --quiet ${SERVICE_NAME}; then
     systemctl status ${SERVICE_NAME} --no-pager -l | head -15
     echo ""
     echo -e "View logs: ${YELLOW}journalctl -u ${SERVICE_NAME} -f${NC}"
-    echo -e "App URL:   ${YELLOW}http://localhost:3000${NC}"
+    echo -e "App URL:   ${YELLOW}http://localhost:3001${NC}"
 else
     echo -e "${RED}=== Deployment failed! ===${NC}"
     echo "Service failed to start. Check logs:"
