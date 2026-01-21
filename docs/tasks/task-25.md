@@ -1,7 +1,7 @@
 # Task-25: Create Systemd Service Unit File for Production
 
 **Phase:** PHASE 8 - Production Deployment
-**Status:** Not Started
+**Status:** Complete
 **Dependencies:** Task-01 (project must exist)
 
 ---
@@ -14,13 +14,13 @@ Create a systemd service unit file that runs the Next.js application in producti
 
 ## Definition of Done
 
-- [ ] Systemd service unit file created (`homelab-observability.service`)
-- [ ] Service runs the production build (`npm start`)
-- [ ] Service starts automatically on system boot
-- [ ] Service restarts automatically on failure (with backoff)
-- [ ] Service runs as appropriate user (not root)
-- [ ] Environment variables configurable via environment file
-- [ ] Service can be managed with standard systemctl commands
+- [x] Systemd service unit file created (`homelab-observability.service`)
+- [x] Service runs the production build (`npm start`)
+- [x] Service starts automatically on system boot
+- [x] Service restarts automatically on failure (with backoff)
+- [x] Service runs as appropriate user (not root)
+- [x] Environment variables configurable via environment file
+- [x] Service can be managed with standard systemctl commands
 
 ---
 

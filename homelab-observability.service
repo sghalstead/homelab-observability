@@ -1,0 +1,38 @@
+[Unit]
+Description=Homelab Observability Service
+Documentation=https://github.com/sghalstead/homelab-observability
+After=network.target
+
+[Service]
+Type=simple
+User=steven
+Group=steven
+WorkingDirectory=/home/steven/code/homelab-observability
+
+# Environment configuration
+EnvironmentFile=/home/steven/code/homelab-observability/.env.production
+
+# Node.js path (using nvm installation)
+Environment=PATH=/home/steven/.nvm/versions/node/v24.12.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Start the production server
+ExecStart=/home/steven/.nvm/versions/node/v24.12.0/bin/npm start
+
+# Restart configuration
+Restart=on-failure
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=homelab-obs
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/steven/code/homelab-observability/data
+ReadWritePaths=/home/steven/code/homelab-observability/.next
+
+[Install]
+WantedBy=multi-user.target

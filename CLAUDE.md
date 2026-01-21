@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 8/24 tasks complete (33%) - Phase 2 (Docker Integration)
+**Current Status:** 12/27 tasks complete (44%) - Phase 2 (Docker Integration) + Phase 8 (Production Deployment)
 
 ## Development Approach
 
@@ -20,9 +20,12 @@ This project follows **Spec-Driven Development (SDD)** and **Test-Driven Develop
 ```
 homelab-observability/
 ├── docs/
-│   ├── project-plan.md      # Master plan with 24 tasks across 7 phases
+│   ├── project-plan.md      # Master plan with 27 tasks across 8 phases
 │   ├── task-approach.md     # Development standards, commit format, DoD
 │   └── tasks/               # Individual task specifications
+├── scripts/
+│   └── service-install.sh   # Install systemd service
+├── homelab-observability.service  # Systemd unit file
 ├── src/
 │   ├── app/                 # Pages and API routes
 │   │   └── api/metrics/     # System metrics endpoints
@@ -122,6 +125,12 @@ npm run format       # Format with Prettier
 npm test             # Vitest watch mode
 npm run test:run     # Vitest single run
 npm run test:e2e     # Playwright E2E tests
+
+# Production (see docs/tasks/task-25.md for full setup)
+./scripts/service-install.sh  # Install systemd service
+sudo systemctl start homelab-observability  # Start production
+sudo systemctl status homelab-observability # Check status
+journalctl -u homelab-observability -f      # View logs
 ```
 
 ## Commit Convention
