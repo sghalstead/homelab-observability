@@ -29,7 +29,7 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 
 ## Project Status
 
-**Progress:** 8/24 tasks complete (33%) - Currently in Phase 2 (Docker Integration)
+**Progress:** 13/27 tasks complete (48%) - Currently in Phase 2 (Docker Integration) + Phase 8 (Production Deployment)
 
 See [docs/project-plan.md](docs/project-plan.md) for detailed implementation progress.
 
@@ -123,6 +123,13 @@ npm run db:studio        # Open Drizzle Studio
 # Documentation
 npm run docs:update      # Sync code snippets in WALKTHROUGH.md
 npm run docs:verify      # Verify code snippets are up to date
+
+# Production Deployment
+npm run deploy           # Build and restart production service
+npm run deploy:quick     # Deploy without lint checks
+npm run service:restart  # Restart service only
+npm run service:status   # Check service status
+npm run service:logs     # Follow service logs
 ```
 
 ## Environment Variables
@@ -131,6 +138,24 @@ npm run docs:verify      # Verify code snippets are up to date
 |----------|---------|-------------|
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
 | `METRICS_RETENTION_HOURS` | `168` | How long to keep metrics (7 days) |
+
+## Production Deployment
+
+The app can run as a systemd service for continuous operation:
+
+```bash
+# First-time setup
+npm run build                    # Build production bundle
+./scripts/service-install.sh     # Install systemd service
+
+# Start the service
+sudo systemctl start homelab-observability
+
+# Deploy updates
+npm run deploy                   # Build and restart
+```
+
+See [docs/tasks/task-25.md](docs/tasks/task-25.md) for detailed setup instructions.
 
 ## Documentation
 
