@@ -199,7 +199,9 @@ Create a detailed sub-plan within the task file when:
     - `WALKTHROUGH.md` - if task modifies architecture or key components
 11. **Create commit** with proper message
 12. **Push to remote:** `git push`
-13. **Move to next task** (if dependencies allow)
+13. **Deploy to production** (see [Production Deployment](#production-deployment))
+14. **Validate production** (see [Production Validation](#production-validation))
+15. **Move to next task** (if dependencies allow)
 
 ### For Critical Tasks
 1. Read task file thoroughly
@@ -211,6 +213,139 @@ Create a detailed sub-plan within the task file when:
 7. Update status in task file and main plan
 8. **Review and update documentation** (`README.md`, `CLAUDE.md`, `WALKTHROUGH.md`)
 9. Create commit and push to remote
+10. **Deploy to production** (see [Production Deployment](#production-deployment))
+11. **Validate production** (see [Production Validation](#production-validation))
+
+## Production Deployment
+
+After pushing changes to the remote repository, deploy to production:
+
+### Deploy Command
+
+```bash
+npm run deploy
+```
+
+This command performs the following:
+1. Checks if the systemd service is installed
+2. Verifies/installs dependencies with `npm ci`
+3. Runs lint checks
+4. Builds the production bundle
+5. Restarts the systemd service
+
+### Quick Deploy (Skip Lint)
+
+For faster deploys when you've already validated locally:
+
+```bash
+npm run deploy:quick
+```
+
+### Manual Deployment Steps
+
+If the automated deploy fails, execute these steps manually:
+
+```bash
+# 1. Install dependencies (if package-lock.json changed)
+npm ci
+
+# 2. Build production bundle
+npm run build
+
+# 3. Restart the service
+sudo systemctl restart homelab-observability
+```
+
+### When to Skip Deployment
+
+Skip deployment only when:
+- Changes are documentation-only (no code changes)
+- Changes only affect test files
+- The production service is intentionally stopped for maintenance
+
+---
+
+## Production Validation
+
+After deploying, validate that changes have taken effect:
+
+### Quick Validation
+
+```bash
+# Check service is running
+npm run service:status
+
+# Verify API responds correctly
+curl -s http://localhost:3001/api/metrics/system | jq '.success'
+```
+
+### Full Validation Checklist
+
+1. **Service Status:**
+   ```bash
+   sudo systemctl status homelab-observability
+   ```
+   - Status should show `active (running)`
+   - No recent restart loops or errors
+
+2. **API Health Check:**
+   ```bash
+   curl -s http://localhost:3001/api/metrics/system
+   ```
+   - Response should have `"success": true`
+   - Data should contain current metrics
+
+3. **UI Verification:**
+   - Open http://localhost:3001 in browser
+   - Navigate to affected pages
+   - Verify new features/changes are visible
+   - Check browser console for errors
+
+4. **Logs Check:**
+   ```bash
+   npm run service:logs
+   ```
+   - Look for errors or warnings
+   - Verify metrics collection is running
+   - Press `Ctrl+C` to exit
+
+### Task-Specific Validation
+
+Depending on the task, also verify:
+
+| Task Type | Additional Validation |
+|-----------|----------------------|
+| API endpoints | `curl` the new/modified endpoints |
+| UI components | Navigate to the page and interact with components |
+| Database changes | Query the database to verify schema/data |
+| Service controls | Test start/stop/restart functionality |
+| Charts/metrics | Verify data displays correctly over time |
+
+### Rollback Procedure
+
+If validation fails:
+
+1. **Check logs for the error:**
+   ```bash
+   journalctl -u homelab-observability -n 50
+   ```
+
+2. **Revert to previous commit:**
+   ```bash
+   git revert HEAD
+   git push
+   npm run deploy
+   ```
+
+3. **Or checkout specific working commit:**
+   ```bash
+   git checkout <commit-hash>
+   npm run deploy
+   ```
+
+See [docs/production.md](production.md) for comprehensive production troubleshooting.
+
+---
 
 ## Risk Management
 
@@ -347,4 +482,4 @@ A successful task execution:
 
 ---
 
-*Last updated: 2026-01-04*
+*Last updated: 2026-01-27*
