@@ -31,7 +31,7 @@ This project builds a comprehensive observability service for a homelab environm
 ## Quick Reference
 
 - **Total Tasks:** 28
-- **Completed:** 16/28
+- **Completed:** 17/28
 - **In Progress:** None
 - **Current Phase:** PHASE 3 (Systemd Integration)
 
@@ -84,7 +84,7 @@ This project builds a comprehensive observability service for a homelab environm
 | Status | Task | Description | Dependencies |
 |--------|------|-------------|--------------|
 | [x] | **Task-12** | Implement systemd service client | Task-04 |
-| [ ] | **Task-13** | Create API routes for systemd services | Task-12 |
+| [x] | **Task-13** | Create API routes for systemd services | Task-12 |
 | [ ] | **Task-14** | Add service control endpoints (start/stop/restart) | Task-13 |
 
 ### PHASE 4: AI Workload Monitoring
@@ -354,12 +354,12 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 16/28 tasks complete (57%)
+Progress: 17/28 tasks complete (61%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
 PHASE 2: [---] 0/3 complete (0%)
-PHASE 3: [#--] 1/3 complete (33%)
+PHASE 3: [##-] 2/3 complete (67%)
 PHASE 4: [---] 0/3 complete (0%)
 PHASE 5: [##---] 2/5 complete (40%)
 PHASE 6: [#] 1/1 complete (100%)

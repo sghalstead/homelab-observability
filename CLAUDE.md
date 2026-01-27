@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 15/28 tasks complete (54%) - Phase 2 (Docker Integration)
+**Current Status:** 17/28 tasks complete (61%) - Phase 3 (Systemd Integration)
 
 ## Development Approach
 
@@ -64,6 +64,8 @@ const metrics = await db.select().from(systemMetrics).limit(10);
 ### Implemented
 - `GET /api/metrics/system` - Current system metrics
 - `GET /api/metrics/system/history?hours=24` - Historical metrics
+- `GET /api/services` - List monitored systemd services with status
+- `GET /api/services/:name` - Detailed info for a specific service
 
 ### Response Format
 ```typescript

@@ -1,7 +1,7 @@
 # Task-13: Create API Routes for Systemd Services
 
 **Phase:** PHASE 3 - Systemd Integration
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** Task-12
 
 ---
@@ -14,10 +14,10 @@ Create Next.js API routes to expose systemd service information via REST endpoin
 
 ## Definition of Done
 
-- [ ] GET /api/services endpoint created
-- [ ] GET /api/services/:name endpoint created
-- [ ] Proper error handling for unavailable services
-- [ ] API tests written
+- [x] GET /api/services endpoint created
+- [x] GET /api/services/:name endpoint created
+- [x] Proper error handling for unavailable services
+- [x] API tests written
 
 ---
 
