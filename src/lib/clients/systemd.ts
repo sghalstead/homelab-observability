@@ -10,7 +10,15 @@ import type {
 const execAsync = promisify(exec);
 
 // Default services to monitor - can be configured via env
-const DEFAULT_SERVICES = ['docker', 'ollama', 'nginx', 'postgresql', 'redis', 'ssh'];
+const DEFAULT_SERVICES = [
+  'homelab-observability',
+  'docker',
+  'ollama',
+  'nginx',
+  'postgresql',
+  'redis',
+  'ssh',
+];
 
 export function getMonitoredServices(): string[] {
   const envServices = process.env.MONITORED_SERVICES;
