@@ -218,41 +218,23 @@ Create a detailed sub-plan within the task file when:
 
 ## Production Deployment
 
-After pushing changes to the remote repository, deploy to production:
+After pushing changes to the remote repository, deploy to production.
 
-### Deploy Command
+**See [docs/production.md](production.md) for complete deployment instructions, including:**
+- Deploy commands (`npm run deploy`, `npm run deploy:quick`)
+- Manual deployment steps
+- Troubleshooting (corrupted builds, port conflicts, etc.)
+
+### Quick Reference
 
 ```bash
+# Standard deploy (lint, build, restart)
 npm run deploy
-```
 
-This command performs the following:
-1. Checks if the systemd service is installed
-2. Verifies/installs dependencies with `npm ci`
-3. Runs lint checks
-4. Builds the production bundle
-5. Restarts the systemd service
-
-### Quick Deploy (Skip Lint)
-
-For faster deploys when you've already validated locally:
-
-```bash
+# Quick deploy (skip lint)
 npm run deploy:quick
-```
 
-### Manual Deployment Steps
-
-If the automated deploy fails, execute these steps manually:
-
-```bash
-# 1. Install dependencies (if package-lock.json changed)
-npm ci
-
-# 2. Build production bundle
-npm run build
-
-# 3. Restart the service
+# Manual restart only
 sudo systemctl restart homelab-observability
 ```
 
@@ -267,7 +249,9 @@ Skip deployment only when:
 
 ## Production Validation
 
-After deploying, validate that changes have taken effect:
+After deploying, validate that changes have taken effect.
+
+**See [docs/production.md](production.md) for the full validation checklist and rollback procedures.**
 
 ### Quick Validation
 
@@ -281,69 +265,14 @@ curl -s http://localhost:3001/api/metrics/system | jq '.success'
 
 ### Full Validation Checklist
 
-1. **Service Status:**
-   ```bash
-   sudo systemctl status homelab-observability
-   ```
-   - Status should show `active (running)`
-   - No recent restart loops or errors
-
-2. **API Health Check:**
-   ```bash
-   curl -s http://localhost:3001/api/metrics/system
-   ```
-   - Response should have `"success": true`
-   - Data should contain current metrics
-
-3. **UI Verification:**
-   - Open http://localhost:3001 in browser
-   - Navigate to affected pages
-   - Verify new features/changes are visible
-   - Check browser console for errors
-
-4. **Logs Check:**
-   ```bash
-   npm run service:logs
-   ```
-   - Look for errors or warnings
-   - Verify metrics collection is running
-   - Press `Ctrl+C` to exit
-
-### Task-Specific Validation
-
-Depending on the task, also verify:
-
-| Task Type | Additional Validation |
-|-----------|----------------------|
-| API endpoints | `curl` the new/modified endpoints |
-| UI components | Navigate to the page and interact with components |
-| Database changes | Query the database to verify schema/data |
-| Service controls | Test start/stop/restart functionality |
-| Charts/metrics | Verify data displays correctly over time |
+1. **Service Status:** `sudo systemctl status homelab-observability` (should be `active (running)`)
+2. **API Health:** `curl -s http://localhost:3001/api/metrics/system` (should have `"success": true`)
+3. **UI Verification:** Open http://localhost:3001, check browser console for errors
+4. **Logs Check:** `npm run service:logs` (look for errors, verify metrics collection)
 
 ### Rollback Procedure
 
-If validation fails:
-
-1. **Check logs for the error:**
-   ```bash
-   journalctl -u homelab-observability -n 50
-   ```
-
-2. **Revert to previous commit:**
-   ```bash
-   git revert HEAD
-   git push
-   npm run deploy
-   ```
-
-3. **Or checkout specific working commit:**
-   ```bash
-   git checkout <commit-hash>
-   npm run deploy
-   ```
-
-See [docs/production.md](production.md) for comprehensive production troubleshooting.
+If validation fails, see [docs/production.md](production.md#troubleshooting) for detailed troubleshooting and rollback steps.
 
 ---
 

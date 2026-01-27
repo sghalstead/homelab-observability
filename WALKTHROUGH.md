@@ -1,6 +1,6 @@
 # Homelab Observability - Project Walkthrough
 
-**Last Updated:** 2026-01-21
+**Last Updated:** 2026-01-27
 
 This document provides a comprehensive technical walkthrough of the homelab-observability codebase, covering architecture, key implementations, and testing components.
 
@@ -181,6 +181,15 @@ export async function GET(): Promise<NextResponse<ApiResponse<SystemMetricsSnaps
 - Queries historical data from database with time range filtering
 - Supports query params: `hours` (default 24) and `limit` (default 1000, max 5000)
 
+**Systemd Services API** (`src/app/api/services/`):
+- `GET /api/services` - List all monitored services with status
+- `GET /api/services/:name` - Detailed info for a specific service
+- `POST /api/services/:name/start` - Start a service (requires sudo)
+- `POST /api/services/:name/stop` - Stop a service (requires sudo)
+- `POST /api/services/:name/restart` - Restart a service (requires sudo)
+
+Services are configured via `MONITORED_SERVICES` environment variable.
+
 ### 3. React Query Hooks (`src/hooks/`)
 
 **useSystemMetrics** - Current metrics with 10s auto-refresh:
@@ -209,6 +218,146 @@ export function useSystemHistory(hours = 24) {
     refetchInterval: 60000, // 1 minute
   });
 }
+```
+
+**useServices** - Systemd services with 15s auto-refresh:
+
+```ts
+// src/hooks/use-services.ts
+
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import type { ApiResponse } from '@/lib/types/api';
+import type { ServiceInfo, ServiceDetails, SystemdStatus } from '@/lib/types/systemd';
+
+interface ServicesResponse {
+  systemd: SystemdStatus;
+  services: ServiceInfo[];
+}
+
+async function fetchServices(): Promise<ServicesResponse> {
+  const response = await fetch('/api/services');
+  const data: ApiResponse<ServicesResponse> = await response.json();
+  if (!data.success || !data.data) throw new Error(data.error);
+  return data.data;
+}
+
+async function fetchServiceDetails(name: string): Promise<ServiceDetails> {
+  const response = await fetch(`/api/services/${name}`);
+  const data: ApiResponse<ServiceDetails> = await response.json();
+  if (!data.success || !data.data) throw new Error(data.error);
+  return data.data;
+}
+
+export function useServices() {
+  return useQuery({
+    queryKey: ['services'],
+    queryFn: fetchServices,
+    refetchInterval: 15000,
+  });
+}
+
+export function useServiceDetails(name: string, enabled = true) {
+  return useQuery({
+    queryKey: ['service-details', name],
+    queryFn: () => fetchServiceDetails(name),
+    enabled,
+    refetchInterval: 15000,
+  });
+}
+
+export function useServiceControl() {
+  const queryClient = useQueryClient();
+
+  const controlMutation = useMutation({
+    mutationFn: async ({
+      name,
+      action,
+    }: {
+      name: string;
+      action: 'start' | 'stop' | 'restart';
+    }) => {
+      const res = await fetch(`/api/services/${name}/${action}`, { method: 'POST' });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || `Failed to ${action} service`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['services'] });
+    },
+  });
+
+  return controlMutation;
+}
+
+```
+
+**useServiceControl** - Mutation for start/stop/restart:
+
+```ts
+// src/hooks/use-services.ts
+
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import type { ApiResponse } from '@/lib/types/api';
+import type { ServiceInfo, ServiceDetails, SystemdStatus } from '@/lib/types/systemd';
+
+interface ServicesResponse {
+  systemd: SystemdStatus;
+  services: ServiceInfo[];
+}
+
+async function fetchServices(): Promise<ServicesResponse> {
+  const response = await fetch('/api/services');
+  const data: ApiResponse<ServicesResponse> = await response.json();
+  if (!data.success || !data.data) throw new Error(data.error);
+  return data.data;
+}
+
+async function fetchServiceDetails(name: string): Promise<ServiceDetails> {
+  const response = await fetch(`/api/services/${name}`);
+  const data: ApiResponse<ServiceDetails> = await response.json();
+  if (!data.success || !data.data) throw new Error(data.error);
+  return data.data;
+}
+
+export function useServices() {
+  return useQuery({
+    queryKey: ['services'],
+    queryFn: fetchServices,
+    refetchInterval: 15000,
+  });
+}
+
+export function useServiceDetails(name: string, enabled = true) {
+  return useQuery({
+    queryKey: ['service-details', name],
+    queryFn: () => fetchServiceDetails(name),
+    enabled,
+    refetchInterval: 15000,
+  });
+}
+
+export function useServiceControl() {
+  const queryClient = useQueryClient();
+
+  const controlMutation = useMutation({
+    mutationFn: async ({
+      name,
+      action,
+    }: {
+      name: string;
+      action: 'start' | 'stop' | 'restart';
+    }) => {
+      const res = await fetch(`/api/services/${name}/${action}`, { method: 'POST' });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || `Failed to ${action} service`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['services'] });
+    },
+  });
+
+  return controlMutation;
+}
+
 ```
 
 ### 4. Services (`src/lib/services/`)
@@ -342,6 +491,16 @@ RootLayout (src/app/layout.tsx)
 - Recharts LineChart with multiple metrics
 - Transforms timestamp to HH:MM format for X-axis
 
+**ServiceCard** (`src/components/services/service-card.tsx`):
+- Displays single systemd service with status badge
+- Color-coded status: green (active), yellow (inactive), red (failed)
+- Control buttons for start/stop/restart with loading states
+
+**ServicesOverview** (`src/components/dashboard/services-overview.tsx`):
+- Displays monitored services in responsive grid
+- Uses `useServices()` and `useServiceControl()` hooks
+- Shows loading skeletons and error states
+
 ### Pages
 
 | Route | Component | Description |
@@ -349,7 +508,7 @@ RootLayout (src/app/layout.tsx)
 | `/` | SystemOverview | Dashboard with current metrics |
 | `/system` | SystemOverview + MetricsHistory | Full monitoring with charts |
 | `/docker` | (stub) | Docker container monitoring |
-| `/services` | (stub) | Systemd service monitoring |
+| `/services` | ServicesOverview | Systemd service monitoring and control |
 | `/ollama` | (stub) | Ollama AI workload monitoring |
 
 ---
