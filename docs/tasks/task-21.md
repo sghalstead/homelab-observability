@@ -1,7 +1,7 @@
 # Task-21: Build Systemd Service Management Components
 
 **Phase:** PHASE 5 - Dashboard UI
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** Task-13, Task-18
 
 ---
@@ -14,12 +14,12 @@ Create React components to display and control systemd services.
 
 ## Definition of Done
 
-- [ ] Services API hooks created
-- [ ] Service list component with status indicators
-- [ ] Service control buttons (start/stop/restart)
-- [ ] Service details modal/card
-- [ ] Auto-refresh for service status
-- [ ] Loading and error states handled
+- [x] Services API hooks created
+- [x] Service list component with status indicators
+- [x] Service control buttons (start/stop/restart)
+- [x] Service details modal/card
+- [x] Auto-refresh for service status
+- [x] Loading and error states handled
 
 ---
 
