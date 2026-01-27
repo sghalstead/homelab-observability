@@ -30,8 +30,8 @@ This project builds a comprehensive observability service for a homelab environm
 
 ## Quick Reference
 
-- **Total Tasks:** 28
-- **Completed:** 19/28
+- **Total Tasks:** 30
+- **Completed:** 19/30
 - **In Progress:** None
 - **Current Phase:** PHASE 3 (Systemd Integration) - Complete
 
@@ -125,6 +125,13 @@ This project builds a comprehensive observability service for a homelab environm
 | [x] | **Task-26** | Create deployment script (build + restart service) | Task-25 |
 | [x] | **Task-27** | Document production setup and deployment process | Task-26 |
 | [x] | **Task-28** | Segregate dev and prod database files | Task-04 |
+
+### PHASE 9: API Specification
+
+| Status | Task | Description | Dependencies |
+|--------|------|-------------|--------------|
+| [ ] | **Task-29** | API specification spike - research and decide approach | None |
+| [ ] | **Task-30** | Implement API specification (based on spike decision) | Task-29 |
 
 ---
 
@@ -277,7 +284,7 @@ interface OllamaStatus {
 ## Success Criteria
 
 ### Technical Criteria
-- [ ] All 28 tasks complete
+- [ ] All 30 tasks complete
 - [ ] TypeScript strict mode with no errors
 - [ ] All tests pass (unit, integration, E2E)
 - [ ] Production build succeeds
@@ -354,7 +361,7 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 19/28 tasks complete (68%)
+Progress: 19/30 tasks complete (63%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
@@ -365,6 +372,7 @@ PHASE 5: [###--] 3/5 complete (60%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)
 PHASE 8: [####] 4/4 complete (100%)
+PHASE 9: [--] 0/2 complete (0%)
 ```
 
 ---
