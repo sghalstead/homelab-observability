@@ -35,6 +35,7 @@ export function MetricsHistory() {
           data={data || []}
           isLoading={isLoading}
           title="CPU, Memory & Disk Usage"
+          hours={hours}
           metrics={[
             { key: 'cpuUsage', name: 'CPU %', color: 'hsl(var(--chart-1))' },
             { key: 'memoryPercent', name: 'Memory %', color: 'hsl(var(--chart-2))' },
@@ -45,6 +46,7 @@ export function MetricsHistory() {
           data={data || []}
           isLoading={isLoading}
           title="CPU Temperature"
+          hours={hours}
           metrics={[{ key: 'cpuTemperature', name: 'Temp °C', color: 'hsl(var(--chart-4))' }]}
         />
       </div>

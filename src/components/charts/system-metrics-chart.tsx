@@ -19,6 +19,7 @@ interface SystemMetricsChartProps {
   data: SystemMetric[];
   isLoading: boolean;
   title: string;
+  hours?: number;
   metrics: Array<{
     key: keyof SystemMetric;
     name: string;
@@ -26,16 +27,55 @@ interface SystemMetricsChartProps {
   }>;
 }
 
-export function SystemMetricsChart({ data, isLoading, title, metrics }: SystemMetricsChartProps) {
+function formatTimeLabel(date: Date, hours: number): string {
+  if (hours <= 6) {
+    // 1h, 6h: Show time only (HH:MM)
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  } else if (hours <= 24) {
+    // 24h: Show time with day indicator if needed
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  } else if (hours <= 168) {
+    // 7d: Show day and time (Mon HH:MM)
+    const day = date.toLocaleDateString([], { weekday: 'short' });
+    const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${day} ${time}`;
+  } else {
+    // 30d: Show date (Jan 21)
+    return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  }
+}
+
+function formatTooltipTime(date: Date, hours: number): string {
+  if (hours <= 24) {
+    return date.toLocaleString([], {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+  return date.toLocaleString([], {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+export function SystemMetricsChart({
+  data,
+  isLoading,
+  title,
+  hours = 24,
+  metrics,
+}: SystemMetricsChartProps) {
   const chartData = useMemo(() => {
     return [...data].reverse().map((d) => ({
       ...d,
-      time: new Date(d.timestamp).toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
+      time: formatTimeLabel(new Date(d.timestamp), hours),
+      fullTime: formatTooltipTime(new Date(d.timestamp), hours),
     }));
-  }, [data]);
+  }, [data, hours]);
 
   if (isLoading) {
     return (
@@ -81,6 +121,12 @@ export function SystemMetricsChart({ data, isLoading, title, metrics }: SystemMe
                 backgroundColor: 'hsl(var(--background))',
                 border: '1px solid hsl(var(--border))',
                 borderRadius: '6px',
+              }}
+              labelFormatter={(_, payload) => {
+                if (payload && payload[0]?.payload?.fullTime) {
+                  return payload[0].payload.fullTime;
+                }
+                return '';
               }}
             />
             <Legend />

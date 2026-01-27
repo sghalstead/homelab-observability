@@ -57,14 +57,14 @@ The application follows a clean layered architecture:
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
 │                      Data Layer                              │
-│  SQLite Database (Drizzle ORM, WAL mode, 7-day retention)   │
+│  SQLite Database (Drizzle ORM, WAL mode, 30-day retention)  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **Background Process:**
 - Scheduler runs every 60s (configurable via `METRICS_COLLECTION_INTERVAL_MS`)
 - Collects metrics and persists to SQLite
-- Hourly cleanup removes data older than retention period (default 7 days)
+- Hourly cleanup removes data older than retention period (default 30 days)
 
 ---
 
@@ -385,7 +385,7 @@ export const config = {
   metrics: {
     collectionIntervalMs: parseInt(process.env.METRICS_COLLECTION_INTERVAL_MS || '60000', 10),
     retentionHours: parseInt(
-      process.env.METRICS_RETENTION_HOURS || '168', // 7 days
+      process.env.METRICS_RETENTION_HOURS || '720', // 30 days
       10
     ),
   },
@@ -599,7 +599,7 @@ Next.js Startup
        → collectSystemMetrics()
        → db.insert(systemMetrics)
        → SQLite database
-       → Cleanup hourly (delete > 7 days)
+       → Cleanup hourly (delete > 30 days)
 ```
 
 ---

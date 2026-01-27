@@ -46,7 +46,7 @@ Available settings:
 | `PORT` | `3001` | HTTP server port (hardcoded in npm script) |
 | `DATABASE_PATH` | `./data/prod.db` | SQLite database file path |
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
-| `METRICS_RETENTION_HOURS` | `168` | How long to keep historical data (7 days) |
+| `METRICS_RETENTION_HOURS` | `720` | How long to keep historical data (30 days) |
 
 ### 3. Build the Application
 

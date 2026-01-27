@@ -142,7 +142,7 @@ npm run service:logs     # Follow service logs
 | `PORT` | `3000` (dev) / `3001` (prod) | HTTP server port |
 | `DATABASE_PATH` | `./data/dev.db` (dev) / `./data/prod.db` (prod) | SQLite database file |
 | `METRICS_COLLECTION_INTERVAL_MS` | `60000` | How often to collect metrics (ms) |
-| `METRICS_RETENTION_HOURS` | `168` | How long to keep metrics (7 days) |
+| `METRICS_RETENTION_HOURS` | `720` | How long to keep metrics (30 days) |
 
 **Note:** Dev and production use separate databases and ports, allowing both to run simultaneously.
 
