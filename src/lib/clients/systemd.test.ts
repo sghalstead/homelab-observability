@@ -5,6 +5,7 @@ import {
   getMonitoredServices,
   getServiceInfo,
   getServiceDetails,
+  isAllowedService,
 } from './systemd';
 
 // Note: These tests run against real systemd
@@ -88,6 +89,30 @@ describe('Systemd Client', () => {
       if (services.length > 0) {
         expect(services[0]).toHaveProperty('name');
         expect(services[0]).toHaveProperty('activeState');
+      }
+    });
+  });
+
+  describe('isAllowedService', () => {
+    it('returns true for monitored services', () => {
+      const services = getMonitoredServices();
+      if (services.length > 0) {
+        expect(isAllowedService(services[0])).toBe(true);
+      }
+    });
+
+    it('returns false for non-monitored services', () => {
+      expect(isAllowedService('definitely-not-a-monitored-service-xyz')).toBe(false);
+    });
+
+    it('returns true for docker (default monitored service)', () => {
+      const originalEnv = process.env.MONITORED_SERVICES;
+      delete process.env.MONITORED_SERVICES;
+
+      expect(isAllowedService('docker')).toBe(true);
+
+      if (originalEnv) {
+        process.env.MONITORED_SERVICES = originalEnv;
       }
     });
   });

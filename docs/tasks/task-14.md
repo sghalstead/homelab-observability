@@ -1,7 +1,7 @@
 # Task-14: Add Service Control Endpoints
 
 **Phase:** PHASE 3 - Systemd Integration
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** Task-13
 
 ---
@@ -14,12 +14,12 @@ Add API endpoints to control systemd services (start, stop, restart) with proper
 
 ## Definition of Done
 
-- [ ] Service control functions added to client
-- [ ] POST /api/services/:name/start endpoint created
-- [ ] POST /api/services/:name/stop endpoint created
-- [ ] POST /api/services/:name/restart endpoint created
-- [ ] Authorization/permission checks documented
-- [ ] Error handling for permission denied
+- [x] Service control functions added to client
+- [x] POST /api/services/:name/start endpoint created
+- [x] POST /api/services/:name/stop endpoint created
+- [x] POST /api/services/:name/restart endpoint created
+- [x] Authorization/permission checks documented
+- [x] Error handling for permission denied
 
 ---
 

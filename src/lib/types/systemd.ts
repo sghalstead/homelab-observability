@@ -27,3 +27,8 @@ export interface SystemdStatus {
   version?: string;
   error?: string;
 }
+
+export interface ServiceControlResult {
+  success: boolean;
+  error?: string;
+}

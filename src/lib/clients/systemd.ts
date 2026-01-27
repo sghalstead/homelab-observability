@@ -1,6 +1,11 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import type { ServiceInfo, ServiceDetails, SystemdStatus } from '@/lib/types/systemd';
+import type {
+  ServiceInfo,
+  ServiceDetails,
+  SystemdStatus,
+  ServiceControlResult,
+} from '@/lib/types/systemd';
 
 const execAsync = promisify(exec);
 
@@ -120,4 +125,53 @@ function parseSystemctlOutput(output: string): Record<string, string> {
   }
 
   return properties;
+}
+
+// Security: Only allow controlling monitored services
+export function isAllowedService(serviceName: string): boolean {
+  const allowedServices = getMonitoredServices();
+  return allowedServices.includes(serviceName);
+}
+
+function handleControlError(error: unknown): ServiceControlResult {
+  const message = error instanceof Error ? error.message : 'Unknown error';
+  if (
+    message.includes('permission denied') ||
+    message.includes('not permitted') ||
+    message.includes('Authentication required') ||
+    message.includes('Access denied')
+  ) {
+    return {
+      success: false,
+      error: 'Permission denied. Service control requires elevated privileges.',
+    };
+  }
+  return { success: false, error: message };
+}
+
+export async function startService(serviceName: string): Promise<ServiceControlResult> {
+  try {
+    await execAsync(`sudo systemctl start ${serviceName}`);
+    return { success: true };
+  } catch (error) {
+    return handleControlError(error);
+  }
+}
+
+export async function stopService(serviceName: string): Promise<ServiceControlResult> {
+  try {
+    await execAsync(`sudo systemctl stop ${serviceName}`);
+    return { success: true };
+  } catch (error) {
+    return handleControlError(error);
+  }
+}
+
+export async function restartService(serviceName: string): Promise<ServiceControlResult> {
+  try {
+    await execAsync(`sudo systemctl restart ${serviceName}`);
+    return { success: true };
+  } catch (error) {
+    return handleControlError(error);
+  }
 }
