@@ -285,6 +285,43 @@ rm -rf .next
 npm run build
 ```
 
+### Corrupted Build (500 Errors, Missing Modules)
+
+If you see errors like:
+- `Cannot find module './chunks/vendor-chunks/next.js'`
+- `Cannot find module '.next/server/pages/_error.js'`
+- 500 errors on pages that were working before
+
+This indicates a corrupted build. The `.next` directory has invalid or missing files.
+
+**Complete Clean Rebuild:**
+
+```bash
+# 1. Stop the service
+sudo systemctl stop homelab-observability
+
+# 2. Remove build artifacts AND node_modules
+rm -rf .next node_modules
+
+# 3. Reinstall dependencies
+npm ci
+
+# 4. Rebuild with explicit production environment
+NODE_ENV=production npm run build
+
+# 5. Restart service
+sudo systemctl start homelab-observability
+
+# 6. Verify
+curl -s http://localhost:3001/api/metrics/system | jq '.success'
+```
+
+**Signs of a corrupted build:**
+- `webpack-runtime.js` contains `eval-source-map` (development mode in production)
+- Missing `pages/` directory in `.next/server/`
+- Missing or incomplete `chunks/` directory
+- `vendor-chunks/` exists instead of `chunks/` (development vs production structure)
+
 ---
 
 ## Backup and Recovery
@@ -430,4 +467,4 @@ rm -rf data/
 
 ---
 
-*Last Updated: 2026-01-21*
+*Last Updated: 2026-01-27*
