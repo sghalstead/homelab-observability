@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { systemMetrics } from '@/db/schema';
 import { desc, gte } from 'drizzle-orm';
-import type { ApiResponse } from '@/lib/types/api';
+import { HistoryQuerySchema, type ApiResponse } from '@/lib/schemas';
 import type { SystemMetric } from '@/db/schema';
 
 export const dynamic = 'force-dynamic';
@@ -12,9 +12,25 @@ export async function GET(
 ): Promise<NextResponse<ApiResponse<SystemMetric[]>>> {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const hours = parseInt(searchParams.get('hours') || '24', 10);
-    const limit = Math.min(parseInt(searchParams.get('limit') || '1000', 10), 5000);
 
+    // Validate query parameters with Zod
+    const queryResult = HistoryQuerySchema.safeParse({
+      hours: searchParams.get('hours'),
+      limit: searchParams.get('limit'),
+    });
+
+    if (!queryResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: queryResult.error.issues.map((e) => e.message).join(', '),
+          timestamp: new Date().toISOString(),
+        },
+        { status: 400 }
+      );
+    }
+
+    const { hours, limit } = queryResult.data;
     const since = new Date(Date.now() - hours * 60 * 60 * 1000);
 
     const metrics = await db

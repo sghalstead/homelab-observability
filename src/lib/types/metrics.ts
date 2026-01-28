@@ -1,3 +1,7 @@
+/**
+ * @deprecated Use SystemMetrics from @/lib/schemas instead.
+ * This interface will be removed in a future version.
+ */
 export interface SystemMetrics {
   timestamp: Date;
   cpu: {
@@ -16,6 +20,10 @@ export interface SystemMetrics {
   };
 }
 
+/**
+ * @deprecated Use types from @/lib/schemas instead.
+ * This interface will be removed in a future version.
+ */
 export interface SystemMetricsSnapshot extends SystemMetrics {
   collected: boolean;
   error?: string;

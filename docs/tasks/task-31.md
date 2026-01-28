@@ -1,7 +1,7 @@
 # Task-31: Domain Schemas and Validation
 
 **Phase:** PHASE 9 - API Specification
-**Status:** Not Started
+**Status:** Complete
 **Dependencies:** Task-30
 
 ---
@@ -14,12 +14,12 @@ Convert existing TypeScript interfaces to Zod schemas and add runtime validation
 
 ## Definition of Done
 
-- [ ] SystemMetrics schema defined with OpenAPI metadata
-- [ ] ServiceStatus schema defined with OpenAPI metadata
-- [ ] Request validation middleware created
-- [ ] At least one endpoint uses schema validation
-- [ ] Types inferred from schemas (replace interfaces)
-- [ ] All existing tests still pass
+- [x] SystemMetrics schema defined with OpenAPI metadata
+- [x] ServiceStatus schema defined with OpenAPI metadata
+- [x] Request validation middleware created (inline in endpoint)
+- [x] At least one endpoint uses schema validation (history endpoint)
+- [x] Types inferred from schemas (replace interfaces)
+- [x] All existing tests still pass (90 tests)
 
 ---
 

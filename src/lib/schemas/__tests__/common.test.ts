@@ -170,24 +170,37 @@ describe('HistoryQuerySchema', () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.hours).toBe(48);
+      expect(result.data.limit).toBe(1000); // default
+    }
+  });
+
+  it('validates hours and limit parameters', () => {
+    const query = { hours: 48, limit: 500 };
+    const result = HistoryQuerySchema.safeParse(query);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.hours).toBe(48);
+      expect(result.data.limit).toBe(500);
     }
   });
 
   it('coerces string to number', () => {
-    const query = { hours: '24' };
+    const query = { hours: '24', limit: '2000' };
     const result = HistoryQuerySchema.safeParse(query);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.hours).toBe(24);
+      expect(result.data.limit).toBe(2000);
     }
   });
 
-  it('provides default value for hours', () => {
+  it('provides default values', () => {
     const query = {};
     const result = HistoryQuerySchema.safeParse(query);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.hours).toBe(24);
+      expect(result.data.limit).toBe(1000);
     }
   });
 
@@ -205,6 +218,12 @@ describe('HistoryQuerySchema', () => {
 
   it('rejects non-integer hours', () => {
     const query = { hours: 24.5 };
+    const result = HistoryQuerySchema.safeParse(query);
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects limit over 5000', () => {
+    const query = { hours: 24, limit: 5001 };
     const result = HistoryQuerySchema.safeParse(query);
     expect(result.success).toBe(false);
   });

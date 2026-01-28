@@ -50,6 +50,13 @@ export const HistoryQuerySchema = z
       .positive()
       .default(24)
       .openapi({ description: 'Number of hours of history to retrieve', example: 24 }),
+    limit: z.coerce
+      .number()
+      .int()
+      .positive()
+      .max(5000)
+      .default(1000)
+      .openapi({ description: 'Maximum number of records to return (max 5000)', example: 1000 }),
   })
   .openapi('HistoryQuery');
 
