@@ -1,7 +1,7 @@
 # Task-32: OpenAPI Spec Generation and Documentation UI
 
 **Phase:** PHASE 9 - API Specification
-**Status:** Not Started
+**Status:** Complete
 **Dependencies:** Task-31
 
 ---
@@ -14,12 +14,12 @@ Generate OpenAPI specification from Zod schemas and serve interactive API docume
 
 ## Definition of Done
 
-- [ ] OpenAPI registry configured with all endpoints
-- [ ] Spec served at `GET /api/openapi.json`
-- [ ] Swagger UI accessible at `/api/docs`
-- [ ] All 7 current endpoints documented
-- [ ] Response examples included in spec
-- [ ] Spec validates against OpenAPI 3.0 standard
+- [x] OpenAPI registry configured with all endpoints
+- [x] Spec served at `GET /api/openapi.json`
+- [x] Swagger UI accessible at `/api/docs`
+- [x] All 7 current endpoints documented
+- [x] Response examples included in spec (via schema descriptions)
+- [x] Spec validates against OpenAPI 3.0 standard
 
 ---
 

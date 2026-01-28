@@ -81,6 +81,18 @@ export const PaginationQuerySchema = z
   })
   .openapi('PaginationQuery');
 
+/**
+ * Error response schema for error-only API responses.
+ * Used for 4xx and 5xx responses where there is no data payload.
+ */
+export const ErrorResponseSchema = z
+  .object({
+    success: z.literal(false).openapi({ description: 'Always false for error responses' }),
+    error: z.string().openapi({ description: 'Error message describing what went wrong' }),
+    timestamp: z.string().datetime().openapi({ description: 'ISO 8601 timestamp' }),
+  })
+  .openapi('ErrorResponse');
+
 // Type exports inferred from schemas
 export type ApiResponse<T> = {
   success: boolean;
@@ -89,6 +101,7 @@ export type ApiResponse<T> = {
   timestamp: string;
 };
 
+export type ErrorResponse = z.infer<typeof ErrorResponseSchema>;
 export type Pagination = z.infer<typeof PaginationSchema>;
 export type HistoryQuery = z.infer<typeof HistoryQuerySchema>;
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;

@@ -31,9 +31,9 @@ This project builds a comprehensive observability service for a homelab environm
 ## Quick Reference
 
 - **Total Tasks:** 32
-- **Completed:** 22/32
+- **Completed:** 23/32
 - **In Progress:** None
-- **Current Phase:** PHASE 9 (API Specification) - In Progress
+- **Current Phase:** PHASE 9 (API Specification) - Complete
 
 ---
 
@@ -133,7 +133,7 @@ This project builds a comprehensive observability service for a homelab environm
 | [x] | **Task-29** | API specification spike - research and decision | None |
 | [x] | **Task-30** | API schema foundation (Zod setup, common schemas) | Task-29 |
 | [x] | **Task-31** | Domain schemas and validation (metrics, services) | Task-30 |
-| [ ] | **Task-32** | OpenAPI spec generation and Swagger UI | Task-31 |
+| [x] | **Task-32** | OpenAPI spec generation and Swagger UI | Task-31 |
 
 ---
 
@@ -363,7 +363,7 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 22/32 tasks complete (69%)
+Progress: 23/32 tasks complete (72%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
@@ -374,7 +374,7 @@ PHASE 5: [###--] 3/5 complete (60%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)
 PHASE 8: [####] 4/4 complete (100%)
-PHASE 9: [###-] 3/4 complete (75%)
+PHASE 9: [####] 4/4 complete (100%)
 ```
 
 ---
