@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 20/32 tasks complete (63%) - Phase 9 In Progress
+**Current Status:** 21/32 tasks complete (66%) - Phase 9 In Progress
 
 ## Development Approach
 
@@ -33,6 +33,7 @@ homelab-observability/
 │   ├── db/                  # Drizzle schema and client
 │   ├── lib/
 │   │   ├── collectors/      # Data collectors (system.ts)
+│   │   ├── schemas/         # Zod schemas for API validation
 │   │   ├── services/        # Business logic (metrics-storage.ts)
 │   │   ├── types/           # TypeScript types (api.ts, metrics.ts)
 │   │   ├── config.ts        # Environment configuration

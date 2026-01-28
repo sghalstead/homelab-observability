@@ -1,7 +1,7 @@
 # Task-30: API Schema Foundation
 
 **Phase:** PHASE 9 - API Specification
-**Status:** Not Started
+**Status:** Complete
 **Dependencies:** Task-29
 
 ---
@@ -14,12 +14,12 @@ Set up Zod schema infrastructure and define core wrapper schemas for the API spe
 
 ## Definition of Done
 
-- [ ] Dependencies installed (zod, @asteasolutions/zod-to-openapi, drizzle-zod)
-- [ ] Schema directory structure created
-- [ ] `ApiResponse<T>` wrapper defined as Zod schema
-- [ ] `PaginatedResponse<T>` wrapper defined as Zod schema
-- [ ] Common query parameter schemas defined (hours, limit, etc.)
-- [ ] Unit tests for schema validation
+- [x] Dependencies installed (zod, @asteasolutions/zod-to-openapi, drizzle-zod)
+- [x] Schema directory structure created
+- [x] `ApiResponse<T>` wrapper defined as Zod schema
+- [x] `PaginatedResponse<T>` wrapper defined as Zod schema
+- [x] Common query parameter schemas defined (hours, limit, etc.)
+- [x] Unit tests for schema validation
 
 ---
 
