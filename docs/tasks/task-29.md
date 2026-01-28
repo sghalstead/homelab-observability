@@ -1,8 +1,9 @@
 # Task-29: API Specification Spike
 
 **Phase:** PHASE 9 - API Specification
-**Status:** Not Started
+**Status:** Complete
 **Dependencies:** None
+**Decision:** [api-specification-decision.md](../api-specification-decision.md)
 
 ---
 
@@ -14,11 +15,11 @@ Research and decide on the API specification approach for the project. Evaluate 
 
 ## Definition of Done
 
-- [ ] Evaluate at least 3 specification approaches
-- [ ] Document pros/cons for each approach
-- [ ] Prototype one approach with a single endpoint
-- [ ] Decision documented with rationale
-- [ ] Implementation plan outlined for chosen approach
+- [x] Evaluate at least 3 specification approaches
+- [x] Document pros/cons for each approach
+- [ ] Prototype one approach with a single endpoint (deferred to Task-30)
+- [x] Decision documented with rationale
+- [x] Implementation plan outlined for chosen approach
 
 ---
 

@@ -30,10 +30,10 @@ This project builds a comprehensive observability service for a homelab environm
 
 ## Quick Reference
 
-- **Total Tasks:** 30
-- **Completed:** 19/30
+- **Total Tasks:** 32
+- **Completed:** 20/32
 - **In Progress:** None
-- **Current Phase:** PHASE 3 (Systemd Integration) - Complete
+- **Current Phase:** PHASE 9 (API Specification) - In Progress
 
 ---
 
@@ -126,12 +126,14 @@ This project builds a comprehensive observability service for a homelab environm
 | [x] | **Task-27** | Document production setup and deployment process | Task-26 |
 | [x] | **Task-28** | Segregate dev and prod database files | Task-04 |
 
-### PHASE 9: API Specification
+### PHASE 9: API Specification (Zod + OpenAPI)
 
 | Status | Task | Description | Dependencies |
 |--------|------|-------------|--------------|
-| [ ] | **Task-29** | API specification spike - research and decide approach | None |
-| [ ] | **Task-30** | Implement API specification (based on spike decision) | Task-29 |
+| [x] | **Task-29** | API specification spike - research and decision | None |
+| [ ] | **Task-30** | API schema foundation (Zod setup, common schemas) | Task-29 |
+| [ ] | **Task-31** | Domain schemas and validation (metrics, services) | Task-30 |
+| [ ] | **Task-32** | OpenAPI spec generation and Swagger UI | Task-31 |
 
 ---
 
@@ -284,7 +286,7 @@ interface OllamaStatus {
 ## Success Criteria
 
 ### Technical Criteria
-- [ ] All 30 tasks complete
+- [ ] All 32 tasks complete
 - [ ] TypeScript strict mode with no errors
 - [ ] All tests pass (unit, integration, E2E)
 - [ ] Production build succeeds
@@ -361,7 +363,7 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 19/30 tasks complete (63%)
+Progress: 20/32 tasks complete (63%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
@@ -372,7 +374,7 @@ PHASE 5: [###--] 3/5 complete (60%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)
 PHASE 8: [####] 4/4 complete (100%)
-PHASE 9: [--] 0/2 complete (0%)
+PHASE 9: [#---] 1/4 complete (25%)
 ```
 
 ---
