@@ -1,7 +1,7 @@
 # Task-17: Add Inference Monitoring and Metrics
 
 **Phase:** PHASE 4 - AI Workload Monitoring
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** Task-16
 
 ---
@@ -14,11 +14,11 @@ Extend Ollama monitoring to track inference metrics and store historical data ab
 
 ## Definition of Done
 
-- [ ] Ollama metrics collection added to scheduler
-- [ ] Ollama metrics saved to database
-- [ ] Historical Ollama metrics queryable
-- [ ] GET /api/ollama/history endpoint created
-- [ ] Tests for Ollama metrics persistence
+- [x] Ollama metrics collection added to scheduler
+- [x] Ollama metrics saved to database
+- [x] Historical Ollama metrics queryable
+- [x] GET /api/ollama/history endpoint created
+- [x] Tests for Ollama metrics persistence
 
 ---
 

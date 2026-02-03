@@ -1,9 +1,10 @@
 import { db } from '@/db';
-import { systemMetrics } from '@/db/schema';
+import { systemMetrics, ollamaMetrics } from '@/db/schema';
 import { lt } from 'drizzle-orm';
 import { collectSystemMetrics } from '@/lib/collectors/system';
+import { getOllamaStatus } from '@/lib/clients/ollama';
 import { config } from '@/lib/config';
-import type { NewSystemMetric } from '@/db/schema';
+import type { NewSystemMetric, NewOllamaMetric } from '@/db/schema';
 
 export async function saveSystemMetrics(): Promise<boolean> {
   try {
@@ -43,6 +44,39 @@ export async function cleanupOldMetrics(): Promise<number> {
     return result.changes || 0;
   } catch (error) {
     console.error('Failed to cleanup old metrics:', error);
+    return 0;
+  }
+}
+
+export async function saveOllamaMetrics(): Promise<boolean> {
+  try {
+    const status = await getOllamaStatus();
+    const timestamp = new Date();
+
+    const record: NewOllamaMetric = {
+      timestamp,
+      running: status.available,
+      modelCount: status.models.length,
+      activeInferences: status.running.length,
+    };
+
+    await db.insert(ollamaMetrics).values(record);
+    return true;
+  } catch (error) {
+    console.error('Failed to save Ollama metrics:', error);
+    return false;
+  }
+}
+
+export async function cleanupOldOllamaMetrics(): Promise<number> {
+  try {
+    const cutoff = new Date(Date.now() - config.metrics.retentionHours * 60 * 60 * 1000);
+
+    const result = await db.delete(ollamaMetrics).where(lt(ollamaMetrics.timestamp, cutoff));
+
+    return result.changes || 0;
+  } catch (error) {
+    console.error('Failed to cleanup old Ollama metrics:', error);
     return 0;
   }
 }

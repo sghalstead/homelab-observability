@@ -1,5 +1,10 @@
 import { config } from '@/lib/config';
-import { saveSystemMetrics, cleanupOldMetrics } from './metrics-storage';
+import {
+  saveSystemMetrics,
+  cleanupOldMetrics,
+  saveOllamaMetrics,
+  cleanupOldOllamaMetrics,
+} from './metrics-storage';
 
 let collectionInterval: NodeJS.Timeout | null = null;
 let cleanupInterval: NodeJS.Timeout | null = null;
@@ -14,23 +19,17 @@ export function startMetricsCollection(): void {
   console.log(`Starting metrics collection (interval: ${config.metrics.collectionIntervalMs}ms)`);
 
   // Collect immediately on start
-  saveSystemMetrics().catch(console.error);
+  collectAllMetrics();
 
   // Schedule regular collection
   collectionInterval = setInterval(() => {
-    saveSystemMetrics().catch(console.error);
+    collectAllMetrics();
   }, config.metrics.collectionIntervalMs);
 
   // Schedule cleanup every hour
   cleanupInterval = setInterval(
     () => {
-      cleanupOldMetrics()
-        .then((deleted) => {
-          if (deleted > 0) {
-            console.log(`Cleaned up ${deleted} old metric records`);
-          }
-        })
-        .catch(console.error);
+      cleanupAllMetrics();
     },
     60 * 60 * 1000
   );
@@ -53,4 +52,27 @@ export function stopMetricsCollection(): void {
 
 export function isMetricsCollectionRunning(): boolean {
   return isRunning;
+}
+
+async function collectAllMetrics(): Promise<void> {
+  const results = await Promise.allSettled([saveSystemMetrics(), saveOllamaMetrics()]);
+
+  results.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      const names = ['system', 'ollama'];
+      console.error(`${names[index]} metrics collection failed:`, result.reason);
+    }
+  });
+}
+
+async function cleanupAllMetrics(): Promise<void> {
+  const [systemDeleted, ollamaDeleted] = await Promise.all([
+    cleanupOldMetrics(),
+    cleanupOldOllamaMetrics(),
+  ]);
+
+  const total = systemDeleted + ollamaDeleted;
+  if (total > 0) {
+    console.log(`Cleaned up ${total} old metric records`);
+  }
 }
