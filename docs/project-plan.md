@@ -31,7 +31,7 @@ This project builds a comprehensive observability service for a homelab environm
 ## Quick Reference
 
 - **Total Tasks:** 32
-- **Completed:** 24/32
+- **Completed:** 25/32
 - **In Progress:** None
 - **Current Phase:** PHASE 4 (AI Workload Monitoring) - In Progress
 
@@ -92,7 +92,7 @@ This project builds a comprehensive observability service for a homelab environm
 | Status | Task | Description | Dependencies |
 |--------|------|-------------|--------------|
 | [x] | **Task-15** | Implement Ollama API client | Task-04 |
-| [ ] | **Task-16** | Create API routes for Ollama status and models | Task-15 |
+| [x] | **Task-16** | Create API routes for Ollama status and models | Task-15 |
 | [ ] | **Task-17** | Add inference monitoring and metrics | Task-16 |
 
 ### PHASE 5: Dashboard UI
@@ -363,13 +363,13 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 24/32 tasks complete (75%)
+Progress: 25/32 tasks complete (78%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
 PHASE 2: [---] 0/3 complete (0%)
 PHASE 3: [###] 3/3 complete (100%)
-PHASE 4: [#--] 1/3 complete (33%)
+PHASE 4: [##-] 2/3 complete (67%)
 PHASE 5: [###--] 3/5 complete (60%)
 PHASE 6: [#] 1/1 complete (100%)
 PHASE 7: [-] 0/1 complete (0%)

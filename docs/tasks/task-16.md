@@ -1,7 +1,7 @@
 # Task-16: Create API Routes for Ollama Status and Models
 
 **Phase:** PHASE 4 - AI Workload Monitoring
-**Status:** Pending
+**Status:** Complete
 **Dependencies:** Task-15
 
 ---
@@ -14,11 +14,11 @@ Create Next.js API routes to expose Ollama server status, available models, and 
 
 ## Definition of Done
 
-- [ ] GET /api/ollama/status endpoint created
-- [ ] GET /api/ollama/models endpoint created
-- [ ] GET /api/ollama/running endpoint created
-- [ ] Graceful handling when Ollama unavailable
-- [ ] API tests written
+- [x] GET /api/ollama/status endpoint created
+- [x] GET /api/ollama/models endpoint created
+- [x] GET /api/ollama/running endpoint created
+- [x] Graceful handling when Ollama unavailable
+- [x] API tests written
 
 ---
 
