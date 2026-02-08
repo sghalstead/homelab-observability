@@ -44,19 +44,25 @@ export function PaginatedResponseSchema<T extends z.ZodTypeAny>(itemSchema: T) {
  */
 export const HistoryQuerySchema = z
   .object({
-    hours: z.coerce
-      .number()
-      .int()
-      .positive()
-      .default(24)
-      .openapi({ description: 'Number of hours of history to retrieve', example: 24 }),
-    limit: z.coerce
-      .number()
-      .int()
-      .positive()
-      .max(5000)
-      .default(1000)
-      .openapi({ description: 'Maximum number of records to return (max 5000)', example: 1000 }),
+    hours: z.preprocess(
+      (val) => (val === null || val === '' ? undefined : val),
+      z.coerce
+        .number()
+        .int()
+        .positive()
+        .default(24)
+        .openapi({ description: 'Number of hours of history to retrieve', example: 24 })
+    ),
+    limit: z.preprocess(
+      (val) => (val === null || val === '' ? undefined : val),
+      z.coerce
+        .number()
+        .int()
+        .positive()
+        .max(5000)
+        .default(1000)
+        .openapi({ description: 'Maximum number of records to return (max 5000)', example: 1000 })
+    ),
   })
   .openapi('HistoryQuery');
 
@@ -65,19 +71,25 @@ export const HistoryQuerySchema = z
  */
 export const PaginationQuerySchema = z
   .object({
-    page: z.coerce
-      .number()
-      .int()
-      .positive()
-      .default(1)
-      .openapi({ description: 'Page number (1-indexed)', example: 1 }),
-    limit: z.coerce
-      .number()
-      .int()
-      .positive()
-      .max(100)
-      .default(20)
-      .openapi({ description: 'Items per page (max 100)', example: 20 }),
+    page: z.preprocess(
+      (val) => (val === null || val === '' ? undefined : val),
+      z.coerce
+        .number()
+        .int()
+        .positive()
+        .default(1)
+        .openapi({ description: 'Page number (1-indexed)', example: 1 })
+    ),
+    limit: z.preprocess(
+      (val) => (val === null || val === '' ? undefined : val),
+      z.coerce
+        .number()
+        .int()
+        .positive()
+        .max(100)
+        .default(20)
+        .openapi({ description: 'Items per page (max 100)', example: 20 })
+    ),
   })
   .openapi('PaginationQuery');
 
