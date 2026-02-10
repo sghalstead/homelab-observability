@@ -9,6 +9,8 @@ const nextConfig = {
       config.externals.push({
         'osx-temperature-sensor': 'commonjs osx-temperature-sensor',
         'macos-temperature-sensor': 'commonjs macos-temperature-sensor',
+        dockerode: 'commonjs dockerode',
+        ssh2: 'commonjs ssh2',
       });
     }
     return config;
