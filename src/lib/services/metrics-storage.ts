@@ -1,10 +1,11 @@
 import { db } from '@/db';
-import { systemMetrics, ollamaMetrics } from '@/db/schema';
+import { systemMetrics, ollamaMetrics, containerMetrics } from '@/db/schema';
 import { lt } from 'drizzle-orm';
 import { collectSystemMetrics } from '@/lib/collectors/system';
 import { getOllamaStatus } from '@/lib/clients/ollama';
+import { listContainers, getContainerStats } from '@/lib/clients/docker';
 import { config } from '@/lib/config';
-import type { NewSystemMetric, NewOllamaMetric } from '@/db/schema';
+import type { NewSystemMetric, NewOllamaMetric, NewContainerMetric } from '@/db/schema';
 
 export async function saveSystemMetrics(): Promise<boolean> {
   try {
@@ -77,6 +78,53 @@ export async function cleanupOldOllamaMetrics(): Promise<number> {
     return result.changes || 0;
   } catch (error) {
     console.error('Failed to cleanup old Ollama metrics:', error);
+    return 0;
+  }
+}
+
+export async function saveContainerMetrics(): Promise<number> {
+  try {
+    const containers = await listContainers(false); // Only running containers
+    const timestamp = new Date();
+    let saved = 0;
+
+    for (const container of containers) {
+      const stats = await getContainerStats(container.id);
+
+      if (stats) {
+        const record: NewContainerMetric = {
+          timestamp,
+          containerId: container.id,
+          containerName: container.name,
+          status: container.state,
+          cpuPercent: stats.cpuPercent,
+          memoryUsed: stats.memoryUsed,
+          memoryLimit: stats.memoryLimit,
+          networkRx: stats.networkRx,
+          networkTx: stats.networkTx,
+        };
+
+        await db.insert(containerMetrics).values(record);
+        saved++;
+      }
+    }
+
+    return saved;
+  } catch (error) {
+    console.error('Failed to save container metrics:', error);
+    return 0;
+  }
+}
+
+export async function cleanupOldContainerMetrics(): Promise<number> {
+  try {
+    const cutoff = new Date(Date.now() - config.metrics.retentionHours * 60 * 60 * 1000);
+
+    const result = await db.delete(containerMetrics).where(lt(containerMetrics.timestamp, cutoff));
+
+    return result.changes || 0;
+  } catch (error) {
+    console.error('Failed to cleanup old container metrics:', error);
     return 0;
   }
 }

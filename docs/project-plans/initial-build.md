@@ -31,9 +31,9 @@ This project builds a comprehensive observability service for a homelab environm
 ## Quick Reference
 
 - **Total Tasks:** 32
-- **Completed:** 29/32
+- **Completed:** 30/32
 - **In Progress:** None
-- **Current Phase:** PHASE 2 (Docker Integration) - In Progress
+- **Current Phase:** PHASE 5 (Dashboard UI) - Task-20 remaining
 
 ---
 
@@ -77,7 +77,7 @@ This project builds a comprehensive observability service for a homelab environm
 |--------|------|-------------|--------------|
 | [x] | **Task-09** | Implement Docker API client | Task-04 |
 | [x] | **Task-10** | Create API routes for Docker containers | Task-09 |
-| [ ] | **Task-11** | Add container metrics persistence | Task-09, Task-08 |
+| [x] | **Task-11** | Add container metrics persistence | Task-09, Task-08 |
 
 ### PHASE 3: Systemd Integration
 
@@ -363,11 +363,11 @@ These features are out of scope for the initial implementation but documented fo
 ## Progress Tracking
 
 ```
-Progress: 29/32 tasks complete (91%)
+Progress: 30/32 tasks complete (94%)
 
 PHASE 0: [#####] 5/5 complete (100%)
 PHASE 1: [###] 3/3 complete (100%)
-PHASE 2: [##-] 2/3 complete (67%)
+PHASE 2: [###] 3/3 complete (100%)
 PHASE 3: [###] 3/3 complete (100%)
 PHASE 4: [###] 3/3 complete (100%)
 PHASE 5: [####-] 4/5 complete (80%)

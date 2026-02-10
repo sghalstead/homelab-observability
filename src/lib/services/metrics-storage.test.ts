@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { saveSystemMetrics, saveOllamaMetrics } from './metrics-storage';
+import { saveSystemMetrics, saveOllamaMetrics, saveContainerMetrics } from './metrics-storage';
 
 vi.mock('@/lib/collectors/system', () => ({
   collectSystemMetrics: vi.fn(),
@@ -7,6 +7,11 @@ vi.mock('@/lib/collectors/system', () => ({
 
 vi.mock('@/lib/clients/ollama', () => ({
   getOllamaStatus: vi.fn(),
+}));
+
+vi.mock('@/lib/clients/docker', () => ({
+  listContainers: vi.fn(),
+  getContainerStats: vi.fn(),
 }));
 
 vi.mock('@/db', () => ({
@@ -20,10 +25,12 @@ vi.mock('@/db', () => ({
 vi.mock('@/db/schema', () => ({
   systemMetrics: {},
   ollamaMetrics: {},
+  containerMetrics: {},
 }));
 
 import { collectSystemMetrics } from '@/lib/collectors/system';
 import { getOllamaStatus } from '@/lib/clients/ollama';
+import { listContainers, getContainerStats } from '@/lib/clients/docker';
 
 describe('Metrics Storage', () => {
   beforeEach(() => {
@@ -105,5 +112,74 @@ describe('Ollama Metrics Storage', () => {
 
     const result = await saveOllamaMetrics();
     expect(result).toBe(false);
+  });
+});
+
+describe('Container Metrics Storage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('saves metrics for running containers', async () => {
+    vi.mocked(listContainers).mockResolvedValue([
+      {
+        id: 'a1b2c3d4e5f6',
+        name: 'nginx',
+        image: 'nginx:latest',
+        status: 'Up 3 hours',
+        state: 'running',
+        created: new Date(),
+        ports: [],
+      },
+    ]);
+
+    vi.mocked(getContainerStats).mockResolvedValue({
+      id: 'a1b2c3d4e5f6',
+      name: 'nginx',
+      cpuPercent: 2.5,
+      memoryUsed: 52428800,
+      memoryLimit: 8589934592,
+      memoryPercent: 0.61,
+      networkRx: 1048576,
+      networkTx: 524288,
+      blockRead: 0,
+      blockWrite: 0,
+    });
+
+    const result = await saveContainerMetrics();
+    expect(result).toBe(1);
+  });
+
+  it('returns 0 when no running containers', async () => {
+    vi.mocked(listContainers).mockResolvedValue([]);
+
+    const result = await saveContainerMetrics();
+    expect(result).toBe(0);
+  });
+
+  it('returns 0 when Docker is unavailable', async () => {
+    vi.mocked(listContainers).mockRejectedValue(new Error('Docker unavailable'));
+
+    const result = await saveContainerMetrics();
+    expect(result).toBe(0);
+  });
+
+  it('skips containers where stats are null', async () => {
+    vi.mocked(listContainers).mockResolvedValue([
+      {
+        id: 'a1b2c3d4e5f6',
+        name: 'nginx',
+        image: 'nginx:latest',
+        status: 'Up 3 hours',
+        state: 'running',
+        created: new Date(),
+        ports: [],
+      },
+    ]);
+
+    vi.mocked(getContainerStats).mockResolvedValue(null);
+
+    const result = await saveContainerMetrics();
+    expect(result).toBe(0);
   });
 });

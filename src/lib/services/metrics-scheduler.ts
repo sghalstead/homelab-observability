@@ -4,6 +4,8 @@ import {
   cleanupOldMetrics,
   saveOllamaMetrics,
   cleanupOldOllamaMetrics,
+  saveContainerMetrics,
+  cleanupOldContainerMetrics,
 } from './metrics-storage';
 
 let collectionInterval: NodeJS.Timeout | null = null;
@@ -55,23 +57,28 @@ export function isMetricsCollectionRunning(): boolean {
 }
 
 async function collectAllMetrics(): Promise<void> {
-  const results = await Promise.allSettled([saveSystemMetrics(), saveOllamaMetrics()]);
+  const results = await Promise.allSettled([
+    saveSystemMetrics(),
+    saveOllamaMetrics(),
+    saveContainerMetrics(),
+  ]);
 
+  const names = ['system', 'ollama', 'container'];
   results.forEach((result, index) => {
     if (result.status === 'rejected') {
-      const names = ['system', 'ollama'];
       console.error(`${names[index]} metrics collection failed:`, result.reason);
     }
   });
 }
 
 async function cleanupAllMetrics(): Promise<void> {
-  const [systemDeleted, ollamaDeleted] = await Promise.all([
+  const [systemDeleted, ollamaDeleted, containerDeleted] = await Promise.all([
     cleanupOldMetrics(),
     cleanupOldOllamaMetrics(),
+    cleanupOldContainerMetrics(),
   ]);
 
-  const total = systemDeleted + ollamaDeleted;
+  const total = systemDeleted + ollamaDeleted + containerDeleted;
   if (total > 0) {
     console.log(`Cleaned up ${total} old metric records`);
   }
