@@ -31,7 +31,7 @@ A real-time monitoring dashboard for homelab environments, built with Next.js an
 
 **Progress:** 19/28 tasks complete (68%) - Phase 3 (Systemd Integration) Complete
 
-See [docs/project-plan.md](docs/project-plan.md) for detailed implementation progress.
+See [docs/project-plans/initial-build.md](docs/project-plans/initial-build.md) for detailed implementation progress.
 
 ## Getting Started
 
@@ -168,7 +168,7 @@ See [Production Deployment Guide](docs/production.md) for detailed setup, troubl
 
 - [Project Walkthrough](WALKTHROUGH.md) - Comprehensive technical overview
 - [Production Guide](docs/production.md) - Deployment, troubleshooting, maintenance
-- [Project Plan](docs/project-plan.md) - Task tracker and progress
+- [Project Plan](docs/project-plans/initial-build.md) - Task tracker and progress
 - [Task Approach](docs/task-approach.md) - Development standards
 - [Task Files](docs/tasks/) - Individual task specifications
 - [CLAUDE.md](CLAUDE.md) - AI assistant context

@@ -31,7 +31,7 @@ This is a **real-time monitoring dashboard** for homelab environments, built wit
 - **Systemd Services**: View and control system services (planned)
 - **Ollama AI Workloads**: Monitor AI models and active inferences (planned)
 
-**Current Status:** See [docs/project-plan.md](docs/project-plan.md) for detailed progress.
+**Current Status:** See [docs/project-plans/initial-build.md](docs/project-plans/initial-build.md) for detailed progress.
 
 ---
 
@@ -613,7 +613,8 @@ Next.js Startup
 ```
 homelab-observability/
 ├── docs/
-│   ├── project-plan.md      # Master plan with tasks
+│   ├── project-plans/        # Project plans
+│   │   └── initial-build.md  # Master plan with tasks
 │   ├── task-approach.md     # Development standards
 │   └── tasks/               # Individual task specifications
 ├── e2e/                     # Playwright E2E tests
@@ -654,5 +655,5 @@ homelab-observability/
 
 - [README.md](README.md) - Quick start and commands
 - [CLAUDE.md](CLAUDE.md) - AI assistant context
-- [docs/project-plan.md](docs/project-plan.md) - Task tracker
+- [docs/project-plans/initial-build.md](docs/project-plans/initial-build.md) - Task tracker
 - [docs/task-approach.md](docs/task-approach.md) - Development standards

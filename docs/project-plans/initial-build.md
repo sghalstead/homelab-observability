@@ -381,9 +381,9 @@ PHASE 9: [####] 4/4 complete (100%)
 
 ## References
 
-- **Task Approach:** [task-approach.md](task-approach.md)
-- **Task Files:** [tasks/](tasks/) directory
-- **Project Prompt:** [../homelab-obs-project-promt.md](../homelab-obs-project-promt.md)
+- **Task Approach:** [../task-approach.md](../task-approach.md)
+- **Task Files:** [../tasks/](../tasks/) directory
+- **Project Prompt:** [../../homelab-obs-project-promt.md](../../homelab-obs-project-promt.md)
 
 ---
 

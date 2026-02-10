@@ -20,7 +20,8 @@ This project follows **Spec-Driven Development (SDD)** and **Test-Driven Develop
 ```
 homelab-observability/
 ├── docs/
-│   ├── project-plan.md      # Master plan with 32 tasks across 9 phases
+│   ├── project-plans/        # Project plans and task tracking
+│   │   └── initial-build.md  # Master plan with 32 tasks across 9 phases
 │   ├── task-approach.md     # Development standards, commit format, DoD
 │   └── tasks/               # Individual task specifications
 ├── scripts/
@@ -97,7 +98,7 @@ See README for full command reference.
 
 - Format: `[claude] Task-NN: Brief description`
 - One task = one commit (squash intermediate work)
-- Update task status in `docs/project-plan.md` before committing
+- Update task status in `docs/project-plans/initial-build.md` before committing
 - All tests must pass before committing
 
 ## Task Execution Workflow
@@ -107,7 +108,7 @@ See README for full command reference.
 3. Write tests first (TDD)
 4. Implement the feature
 5. Run validation: `npm run test:run && npm run lint && npm run build`
-6. Update task status in `docs/project-plan.md`
+6. Update task status in `docs/project-plans/initial-build.md`
 7. Commit with standardized message
 
 ## Tech Stack Details
@@ -144,4 +145,4 @@ See README for full command reference.
 | README.md | User-facing: getting started, full command reference |
 | WALKTHROUGH.md | Deep technical walkthrough of architecture and code |
 | docs/production.md | Production deployment and troubleshooting |
-| docs/project-plan.md | Task tracker and project progress |
+| docs/project-plans/initial-build.md | Task tracker and project progress |

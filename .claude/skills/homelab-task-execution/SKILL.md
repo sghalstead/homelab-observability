@@ -45,7 +45,7 @@ This is the standard 15-step workflow. Follow it for every task.
 
 ### Phase 4: Documentation & Commit
 9. **Update task status** in `docs/tasks/task-NN.md`
-10. **Update task status** in `docs/project-plan.md`
+10. **Update task status** in `docs/project-plans/initial-build.md`
 11. **Review and update documentation** — Update if the task introduces relevant changes:
     - `README.md` — New features, commands, API changes, environment variables
     - `CLAUDE.md` — Structure changes, new patterns, schema changes, API changes
@@ -120,7 +120,7 @@ After each task, check whether these files need updates:
 | `README.md` | New features, API changes, commands, environment variables |
 | `CLAUDE.md` | Structure changes, new patterns, schema changes, API changes |
 | `WALKTHROUGH.md` | Architecture changes, new components, data flow changes |
-| `docs/project-plan.md` | Always (task status) |
+| `docs/project-plans/initial-build.md` | Always (task status) |
 
 ## Quality Standards
 
@@ -147,7 +147,7 @@ After each task, check whether these files need updates:
 When creating a new task, use the template at `docs/tasks/task-template.md`.
 
 ### Steps
-1. Determine the next task number (check `docs/project-plan.md` for existing tasks)
+1. Determine the next task number (check `docs/project-plans/initial-build.md` for existing tasks)
 2. Copy the template: `docs/tasks/task-template.md` → `docs/tasks/task-NN.md`
 3. Fill in all sections:
    - **Header**: Set the task number, title, phase, status (`Pending`), and dependencies
@@ -157,7 +157,7 @@ When creating a new task, use the template at `docs/tasks/task-template.md`.
    - **Files Created/Modified**: List every file that will be touched
    - **Validation Steps**: How to verify the task is complete (automated + manual)
    - **Commit Message**: Pre-written commit message following the `[claude] Task-NN:` format
-4. Add the task to `docs/project-plan.md` under the appropriate phase
+4. Add the task to `docs/project-plans/initial-build.md` under the appropriate phase
 5. Optionally add a **Notes** section for assumptions, risks, or alternative approaches
 
 ### Template Location
@@ -173,5 +173,5 @@ When creating a new task, use the template at `docs/tasks/task-template.md`.
 
 - **Validation checklists by task type:** [references/validation-checklists.md](references/validation-checklists.md)
 - **Production deployment procedures:** [references/production-deployment.md](references/production-deployment.md)
-- **Main project plan:** `docs/project-plan.md`
+- **Main project plan:** `docs/project-plans/initial-build.md`
 - **Individual task specs:** `docs/tasks/` directory
