@@ -15,4 +15,7 @@ export const config = {
     host: process.env.OLLAMA_HOST || 'http://localhost:11434',
     timeoutMs: parseInt(process.env.OLLAMA_TIMEOUT_MS || '5000', 10),
   },
+  docker: {
+    socketPath: process.env.DOCKER_SOCKET || '/var/run/docker.sock',
+  },
 };

@@ -47,3 +47,24 @@ export {
   type ServiceControlAction,
   type ServiceControlResult,
 } from './services';
+
+// Docker schemas and types
+export {
+  ContainerStateSchema,
+  PortTypeSchema,
+  ContainerPortSchema,
+  ContainerInfoSchema,
+  ContainerStatsSchema,
+  ContainerCountsSchema,
+  DockerStatusSchema,
+  ContainerControlActionSchema,
+  ContainerControlResultSchema,
+  type ContainerState,
+  type ContainerPort,
+  type ContainerInfo,
+  type ContainerStats,
+  type ContainerCounts,
+  type DockerStatus,
+  type ContainerControlAction,
+  type ContainerControlResult,
+} from './docker';

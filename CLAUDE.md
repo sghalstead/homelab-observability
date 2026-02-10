@@ -4,7 +4,7 @@
 
 This is a homelab observability service that monitors system metrics, Docker containers, systemd services, and Ollama AI workloads. Built with Next.js 14 and TypeScript.
 
-**Current Status:** 23/32 tasks complete (72%) - Phase 9 Complete
+**Current Status:** 28/32 tasks complete (88%) - Phase 2 In Progress
 
 ## Development Approach
 
@@ -124,9 +124,9 @@ See README for full command reference.
 | State | React Query | Auto-refresh, caching |
 | Testing | Vitest + Playwright | Unit/integration + E2E |
 
-## External Integrations (Planned)
+## External Integrations
 
-- **Docker**: Via `dockerode` library, requires socket access
+- **Docker**: Via `dockerode` library, requires socket access (`/var/run/docker.sock`)
 - **Systemd**: Via `systemctl` commands
 - **Ollama**: Via REST API (default: http://localhost:11434)
 
