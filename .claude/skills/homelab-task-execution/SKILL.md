@@ -1,7 +1,10 @@
 ---
 name: homelab-task-execution
 description: This skill should be used when the user asks to "execute a task", "work on task", "implement task", "start task-NN", "create a task", "add a task", "new task", "commit changes", "deploy to production", "run validation", or references the project task workflow. Provides the standard development workflow, commit conventions, TDD approach, task creation template, and definition of done for the homelab-observability project.
-version: 1.0.0
+argument-hint: "[task-number]"
+allowed-tools: "Bash(npm run test:run*) Bash(npm run lint*) Bash(npm run build*) Bash(npm run deploy*) Bash(npm run type-check*) Bash(npm run dev*) Bash(git add*) Bash(git commit*) Bash(git push*) Bash(git status*) Bash(git diff*) Bash(git log*) Bash(sudo systemctl*) Bash(curl*)"
+metadata:
+  version: 1.1.0
 ---
 
 # Homelab Task Execution Workflow
